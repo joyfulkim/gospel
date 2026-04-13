@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>새생명 축제 2026 | 은혜교회</title>
-  <meta name="description" content="2026년 5월 17일~22일, 새 생명 새 시작 — 은혜교회 새생명 축제">
+  <title>새생명 축제 2026 | 꿈을심는교회</title>
+  <meta name="description" content="2026년 5월 17일~22일, 새 생명 새 시작 — 꿈을심는교회 새생명 축제">
+  <link rel="icon" type="image/png" href="logo-vwc.png">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
@@ -92,10 +93,8 @@
 <nav class="glass-nav fixed top-0 left-0 right-0 z-50">
   <div class="max-w-6xl mx-auto px-5 h-14 flex items-center justify-between">
     <button @click="navigate('landing')" class="flex items-center gap-2.5">
-      <div class="w-7 h-7 rounded-lg flex items-center justify-center" style="background:linear-gradient(135deg,#f59e0b,#d97706)">
-        <iconify-icon icon="solar:star-bold" style="color:#000;font-size:14px"></iconify-icon>
-      </div>
-      <span class="font-bold text-sm">새생명 축제 <span class="text-amber-400">2026</span></span>
+      <img src="logo-vwc.png" alt="꿈을심는교회 로고" class="h-8 w-auto object-contain">
+      <span class="font-bold" style="font-size:15px">새생명 축제 <span class="text-amber-400">2026</span></span>
     </button>
 
     <div class="hidden md:flex items-center gap-5 text-sm">
@@ -123,9 +122,9 @@
     <div class="flex items-center gap-2">
       <template x-if="!isLoggedIn">
         <div class="flex gap-2">
-          <button @click="navigate('register')" class="btn-ghost btn-sm">회원가입</button>
-          <button @click="navigate('login')" class="btn-primary btn-sm">
-            <div class="ic"><iconify-icon icon="solar:user-bold" style="font-size:12px;color:#000"></iconify-icon></div>
+          <button @click="navigate('register')" class="btn-ghost" style="padding:5px 11px;font-size:.68rem;gap:4px">회원가입</button>
+          <button @click="navigate('login')" class="btn-primary" style="padding:5px 11px;font-size:.68rem;gap:4px">
+            <div class="ic" style="width:18px;height:18px"><iconify-icon icon="solar:user-bold" style="font-size:10px;color:#000"></iconify-icon></div>
             로그인
           </button>
         </div>
