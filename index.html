@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>새생명 축제 2026 | 은혜교회</title>
+  <meta name="description" content="2026년 5월 17일~22일, 새 생명 새 시작 — 은혜교회 새생명 축제에 초청합니다.">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: { extend: { fontFamily: { sans: ['Pretendard', '-apple-system', 'sans-serif'] } } }
+    }
+  </script>
+  <style>
+    *, *::before, *::after { font-family: 'Pretendard', -apple-system, sans-serif; word-break: keep-all; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body { background-color: #0a0a0a; color: #f5f5f5; overflow-x: hidden; }
+
+    /* Double-Bezel Card */
+    .bezel { background: linear-gradient(145deg, rgba(255,255,255,0.08) 0%, rgba(255,255,255,0.02) 100%); border: 1px solid rgba(255,255,255,0.09); border-radius: 18px; padding: 1px; }
+    .bezel-inner { background: linear-gradient(145deg, #121212 0%, #0d0d0d 100%); border-radius: 17px; height: 100%; }
+
+    /* Nav */
+    .glass-nav { background: rgba(10,10,10,0.88); backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px); border-bottom: 1px solid rgba(255,255,255,0.06); }
+
+    /* Amber gradient text */
+    .amber-text { background: linear-gradient(135deg, #fde68a 0%, #f59e0b 50%, #d97706 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+    /* Buttons */
+    .btn-primary { display: inline-flex; align-items: center; gap: 8px; padding: 13px 28px; background: linear-gradient(135deg, #f59e0b, #d97706); border-radius: 9999px; font-weight: 700; font-size: 0.9rem; color: #000; transition: all 0.35s cubic-bezier(0.16,1,0.3,1); box-shadow: 0 4px 24px rgba(245,158,11,0.28); cursor: pointer; border: none; white-space: nowrap; }
+    .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 36px rgba(245,158,11,0.42); }
+    .btn-primary .ic { width: 28px; height: 28px; background: rgba(0,0,0,0.22); border-radius: 9999px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .btn-ghost { display: inline-flex; align-items: center; gap: 8px; padding: 13px 28px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 9999px; font-weight: 500; font-size: 0.9rem; color: #f5f5f5; transition: all 0.35s cubic-bezier(0.16,1,0.3,1); cursor: pointer; border-style: solid; white-space: nowrap; }
+    .btn-ghost:hover { background: rgba(255,255,255,0.09); transform: translateY(-1px); }
+    .btn-sm { padding: 8px 18px !important; font-size: 0.78rem !important; gap: 5px !important; }
+    .btn-danger { background: rgba(239,68,68,0.12) !important; border-color: rgba(239,68,68,0.25) !important; color: #fca5a5 !important; }
+    .btn-danger:hover { background: rgba(239,68,68,0.2) !important; }
+
+    /* Form inputs */
+    .inp { width: 100%; padding: 10px 14px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); border-radius: 10px; color: #f5f5f5; font-size: 0.88rem; transition: border-color 0.2s, background 0.2s; appearance: none; -webkit-appearance: none; }
+    .inp:focus { outline: none; border-color: rgba(245,158,11,0.5); background: rgba(245,158,11,0.03); }
+    .inp::placeholder { color: #3f3f46; }
+    select.inp { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24'%3E%3Cpath fill='%23666' d='m7 10l5 5l5-5z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 36px; }
+    select.inp option { background: #1a1a1a; color: #f5f5f5; }
+    textarea.inp { resize: vertical; min-height: 90px; line-height: 1.6; }
+
+    /* Countdown */
+    .cd-box { background: rgba(245,158,11,0.07); border: 1px solid rgba(245,158,11,0.22); border-radius: 14px; padding: 14px 18px; text-align: center; min-width: 76px; }
+
+    /* Badges */
+    .badge { display: inline-flex; align-items: center; padding: 2px 10px; border-radius: 9999px; font-size: 0.72rem; font-weight: 600; white-space: nowrap; }
+    .b-gray { background: rgba(161,161,170,0.12); color: #a1a1aa; border: 1px solid rgba(161,161,170,0.2); }
+    .b-blue { background: rgba(59,130,246,0.12); color: #93c5fd; border: 1px solid rgba(59,130,246,0.2); }
+    .b-amber { background: rgba(245,158,11,0.12); color: #fcd34d; border: 1px solid rgba(245,158,11,0.22); }
+    .b-green { background: rgba(34,197,94,0.12); color: #86efac; border: 1px solid rgba(34,197,94,0.22); }
+    .b-purple { background: rgba(168,85,247,0.12); color: #d8b4fe; border: 1px solid rgba(168,85,247,0.22); }
+
+    /* Divider */
+    .divider { height: 1px; background: linear-gradient(90deg, transparent, rgba(245,158,11,0.28), transparent); }
+
+    /* Animations */
+    @keyframes fadeUp { from { opacity:0; transform:translateY(28px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes fadeIn { from { opacity:0; } to { opacity:1; } }
+    @keyframes glowPulse { 0%,100% { opacity:.6; } 50% { opacity:1; } }
+    @keyframes float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-10px); } }
+    .aup { animation: fadeUp 0.65s cubic-bezier(0.16,1,0.3,1) both; }
+    .ain { animation: fadeIn 0.5s ease both; }
+    .d1{animation-delay:.1s} .d2{animation-delay:.2s} .d3{animation-delay:.3s} .d4{animation-delay:.4s} .d5{animation-delay:.5s} .d6{animation-delay:.6s} .d7{animation-delay:.7s}
+
+    /* Backgrounds */
+    .hero-bg { background: radial-gradient(ellipse 100% 65% at 50% -5%, rgba(245,158,11,0.13) 0%, transparent 65%), radial-gradient(ellipse 50% 40% at 80% 50%, rgba(245,158,11,0.05) 0%, transparent 60%); }
+    .section-dark { background: #0a0a0a; }
+    .section-raised { background: #0e0e0e; }
+
+    /* Table */
+    .tbl th { background: rgba(255,255,255,0.025); color: #71717a; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.05em; text-transform: uppercase; padding: 10px 14px; white-space: nowrap; }
+    .tbl td { padding: 12px 14px; border-top: 1px solid rgba(255,255,255,0.04); font-size: 0.84rem; }
+    .tbl tr:hover td { background: rgba(255,255,255,0.015); }
+
+    /* Modal */
+    .modal-overlay { background: rgba(0,0,0,0.82); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 4px; } ::-webkit-scrollbar-track { background: transparent; } ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 4px; }
+
+    /* Preview box */
+    .preview-box { background: #0f0f0f; border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 22px; font-size: 0.84rem; line-height: 1.85; color: #d4d4d8; white-space: pre-wrap; font-family: 'Pretendard', monospace; }
+
+    /* Nav link */
+    .nav-link { cursor: pointer; transition: color 0.2s; color: #71717a; padding: 4px 0; }
+    .nav-link:hover { color: #e4e4e7; }
+    .nav-link.on { color: #f59e0b !important; }
+
+    /* Gospel */
+    .gospel-glow { background: radial-gradient(ellipse 80% 60% at 50% 50%, rgba(245,158,11,0.08) 0%, transparent 65%); }
+
+    [x-cloak] { display: none !important; }
+
+    /* Stat icon wrap */
+    .stat-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+    /* Timeline */
+    .tl-dot { width: 10px; height: 10px; background: #f59e0b; border-radius: 9999px; box-shadow: 0 0 10px rgba(245,158,11,0.6); flex-shrink: 0; margin-top: 5px; }
+    .tl-line { position: absolute; left: 4px; top: 0; bottom: 0; width: 2px; background: linear-gradient(180deg, rgba(245,158,11,0.7), rgba(245,158,11,0.05)); }
+
+    /* Progress bar */
+    .prog-bar { height: 4px; border-radius: 9999px; background: linear-gradient(90deg, #f59e0b, #d97706); }
+  </style>
+</head>
+
+<body x-data="gospel()" x-init="init()" class="min-h-[100dvh]">
+
+<!-- ═══════════════════════ NAVIGATION ═══════════════════════ -->
+<nav class="glass-nav fixed top-0 left-0 right-0 z-50">
+  <div class="max-w-6xl mx-auto px-5 h-14 flex items-center justify-between">
+    <button @click="navigate('landing')" class="flex items-center gap-2.5 group">
+      <div class="w-7 h-7 rounded-lg flex items-center justify-center" style="background:linear-gradient(135deg,#f59e0b,#d97706)">
+        <iconify-icon icon="solar:star-bold" style="color:#000;font-size:14px"></iconify-icon>
+      </div>
+      <span class="font-bold text-sm text-white">새생명 축제 <span class="text-amber-400">2026</span></span>
+    </button>
+
+    <!-- Desktop Nav -->
+    <div class="hidden md:flex items-center gap-6 text-sm">
+      <span class="nav-link" :class="currentView==='landing'?'on':''" @click="navigate('landing')">행사안내</span>
+      <span class="nav-link" :class="currentView==='decision'?'on':''" @click="navigate('decision')">결단카드</span>
+      <template x-if="isLoggedIn">
+        <span class="nav-link" :class="currentView==='dashboard'?'on':''" @click="navigate('dashboard')">대시보드</span>
+      </template>
+      <template x-if="isLoggedIn">
+        <span class="nav-link" :class="currentView==='targets'?'on':''" @click="navigate('targets')">전도관리</span>
+      </template>
+      <template x-if="isLoggedIn">
+        <span class="nav-link" :class="currentView==='invite'?'on':''" @click="navigate('invite')">초청발송</span>
+      </template>
+    </div>
+
+    <div class="flex items-center gap-2">
+      <template x-if="!isLoggedIn">
+        <button @click="navigate('login')" class="btn-primary btn-sm">
+          <div class="ic"><iconify-icon icon="solar:user-bold" style="font-size:13px;color:#000"></iconify-icon></div>
+          성도 로그인
+        </button>
+      </template>
+      <template x-if="isLoggedIn">
+        <div class="flex items-center gap-2">
+          <button @click="navigate('dashboard')" class="btn-ghost btn-sm">
+            <iconify-icon icon="solar:chart-bold" style="font-size:14px"></iconify-icon>
+            <span class="hidden sm:inline">대시보드</span>
+          </button>
+          <button @click="logout()" class="btn-ghost btn-sm">
+            <iconify-icon icon="solar:logout-bold" style="font-size:14px"></iconify-icon>
+          </button>
+        </div>
+      </template>
+    </div>
+  </div>
+</nav>
+
+<!-- ═══════════════════════ LANDING VIEW ═══════════════════════ -->
+<div x-show="currentView==='landing'" x-cloak>
+
+  <!-- HERO -->
+  <section class="hero-bg min-h-[100dvh] flex flex-col items-center justify-center px-5 pt-20 pb-16 relative overflow-hidden">
+    <!-- Decorative orbs -->
+    <div class="absolute top-20 left-1/4 w-96 h-96 rounded-full pointer-events-none" style="background:radial-gradient(circle,rgba(245,158,11,0.06),transparent 70%)"></div>
+    <div class="absolute bottom-20 right-1/4 w-64 h-64 rounded-full pointer-events-none" style="background:radial-gradient(circle,rgba(245,158,11,0.04),transparent 70%)"></div>
+
+    <div class="max-w-3xl w-full text-center space-y-6 relative z-10">
+      <!-- Label -->
+      <div class="aup inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold" style="background:rgba(245,158,11,0.1);border:1px solid rgba(245,158,11,0.25);color:#fbbf24">
+        <span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-pulse inline-block"></span>
+        은혜교회 · 2026년 5월 17일 – 22일
+      </div>
+
+      <!-- Title -->
+      <h1 class="aup d1 text-5xl md:text-7xl font-bold tracking-tight leading-[1.1]">
+        <span class="amber-text">새생명 축제</span><br>
+        <span class="text-white">2026</span>
+      </h1>
+
+      <!-- Tagline -->
+      <p class="aup d2 text-lg md:text-2xl text-zinc-400 font-light">
+        "새 생명, 새 시작" — 당신의 삶에 <span style="-webkit-text-fill-color:#fbbf24">새로운 빛</span>이 비춥니다
+      </p>
+
+      <!-- Countdown -->
+      <div class="aup d3 flex items-center justify-center gap-3 flex-wrap">
+        <div class="cd-box">
+          <div class="text-3xl font-bold amber-text" x-text="String(countdown.days).padStart(2,'0')">00</div>
+          <div class="text-xs text-zinc-500 mt-1 font-medium">일</div>
+        </div>
+        <span class="text-2xl text-zinc-600 font-light">:</span>
+        <div class="cd-box">
+          <div class="text-3xl font-bold amber-text" x-text="String(countdown.hours).padStart(2,'0')">00</div>
+          <div class="text-xs text-zinc-500 mt-1 font-medium">시간</div>
+        </div>
+        <span class="text-2xl text-zinc-600 font-light">:</span>
+        <div class="cd-box">
+          <div class="text-3xl font-bold amber-text" x-text="String(countdown.minutes).padStart(2,'0')">00</div>
+          <div class="text-xs text-zinc-500 mt-1 font-medium">분</div>
+        </div>
+        <span class="text-2xl text-zinc-600 font-light">:</span>
+        <div class="cd-box">
+          <div class="text-3xl font-bold text-white" x-text="String(countdown.seconds).padStart(2,'0')">00</div>
+          <div class="text-xs text-zinc-500 mt-1 font-medium">초</div>
+        </div>
+      </div>
+      <p class="text-xs text-zinc-600">개막 예배까지 남은 시간</p>
+
+      <!-- CTAs -->
+      <div class="aup d4 flex flex-wrap items-center justify-center gap-3 pt-2">
+        <button @click="document.getElementById('schedule').scrollIntoView({behavior:'smooth'})" class="btn-primary">
+          <div class="ic"><iconify-icon icon="solar:calendar-bold" style="font-size:13px;color:#000"></iconify-icon></div>
+          행사 일정 보기
+        </button>
+        <button @click="navigate('decision')" class="btn-ghost">
+          <iconify-icon icon="solar:heart-bold" style="font-size:15px;color:#f59e0b"></iconify-icon>
+          결단 카드 작성
+        </button>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-1 text-zinc-600 text-xs">
+      <iconify-icon icon="solar:alt-arrow-down-bold" style="font-size:20px;animation:float 2s ease-in-out infinite"></iconify-icon>
+    </div>
+  </section>
+
+  <!-- HIGHLIGHTS BENTO -->
+  <section class="section-raised py-20 px-5">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-12">
+        <p class="text-xs font-semibold text-amber-500 tracking-widest mb-3">WHY THIS FESTIVAL</p>
+        <h2 class="text-3xl md:text-4xl font-bold">이번 축제에서<br class="sm:hidden"> 만날 특별한 것들</h2>
+      </div>
+
+      <!-- Bento Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <!-- Large card -->
+        <div class="bezel md:col-span-2 md:row-span-2">
+          <div class="bezel-inner p-8 flex flex-col h-full min-h-[240px]">
+            <div class="w-12 h-12 rounded-2xl mb-5 flex items-center justify-center" style="background:rgba(245,158,11,0.12)">
+              <iconify-icon icon="solar:book-bold" style="font-size:24px;color:#f59e0b"></iconify-icon>
+            </div>
+            <h3 class="text-xl font-bold mb-3">생명의 말씀</h3>
+            <p class="text-zinc-400 text-sm leading-relaxed flex-1">삶의 무게에 지쳐있는 당신에게 전하는 특별한 메시지. 이철호 목사님의 복음 중심 말씀으로 마음의 참된 안식을 경험하세요. 매일 저녁 새로운 메시지가 준비됩니다.</p>
+            <div class="mt-6 flex items-center gap-2 text-xs text-amber-400 font-medium">
+              <iconify-icon icon="solar:star-bold" style="font-size:14px"></iconify-icon>
+              이철호 목사 · 특별 강사 초청
+            </div>
+          </div>
+        </div>
+
+        <!-- Small card 1 -->
+        <div class="bezel">
+          <div class="bezel-inner p-6">
+            <div class="w-10 h-10 rounded-xl mb-4 flex items-center justify-center" style="background:rgba(99,102,241,0.12)">
+              <iconify-icon icon="solar:music-note-bold" style="font-size:20px;color:#818cf8"></iconify-icon>
+            </div>
+            <h3 class="font-bold mb-2">찬양 & 경배</h3>
+            <p class="text-zinc-400 text-sm">감동적인 워십팀의 라이브 찬양. 마음 깊은 곳을 울리는 음악으로 하나님 앞에 나아가세요.</p>
+          </div>
+        </div>
+
+        <!-- Small card 2 -->
+        <div class="bezel">
+          <div class="bezel-inner p-6">
+            <div class="w-10 h-10 rounded-xl mb-4 flex items-center justify-center" style="background:rgba(34,197,94,0.1)">
+              <iconify-icon icon="solar:users-group-two-rounded-bold" style="font-size:20px;color:#4ade80"></iconify-icon>
+            </div>
+            <h3 class="font-bold mb-2">삶의 변화 간증</h3>
+            <p class="text-zinc-400 text-sm">복음으로 삶이 새로워진 성도들의 진솔한 간증. 당신의 이야기가 될 수 있습니다.</p>
+          </div>
+        </div>
+
+        <!-- Wide card -->
+        <div class="bezel md:col-span-3">
+          <div class="bezel-inner p-6 flex flex-col sm:flex-row items-start sm:items-center gap-5">
+            <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(245,158,11,0.1)">
+              <iconify-icon icon="solar:hand-heart-bold" style="font-size:20px;color:#f59e0b"></iconify-icon>
+            </div>
+            <div class="flex-1">
+              <h3 class="font-bold mb-1">1:1 개인 상담 & 기도</h3>
+              <p class="text-zinc-400 text-sm">행사 후 개인 기도 및 상담 시간이 마련됩니다. 훈련된 상담 사역자들이 함께합니다.</p>
+            </div>
+            <button @click="navigate('decision')" class="btn-primary btn-sm flex-shrink-0">
+              신청하기
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- SCHEDULE -->
+  <section id="schedule" class="section-dark py-20 px-5">
+    <div class="max-w-4xl mx-auto">
+      <div class="text-center mb-14">
+        <p class="text-xs font-semibold text-amber-500 tracking-widest mb-3">SCHEDULE</p>
+        <h2 class="text-3xl md:text-4xl font-bold">6일간의 특별한 일정</h2>
+        <p class="text-zinc-500 mt-3 text-sm">2026년 5월 17일(일) — 22일(금) · 매일 저녁 7시</p>
+      </div>
+
+      <div class="relative pl-8">
+        <div class="tl-line"></div>
+        <div class="space-y-8">
+          <template x-for="(item, idx) in schedule" :key="idx">
+            <div class="relative flex gap-5">
+              <div class="tl-dot absolute -left-[17px]"></div>
+              <div class="flex-1 bezel">
+                <div class="bezel-inner p-5">
+                  <div class="flex flex-wrap items-start justify-between gap-2 mb-2">
+                    <div>
+                      <span class="badge b-amber text-xs" x-text="item.date"></span>
+                      <span class="ml-2 text-xs text-zinc-500" x-text="item.day"></span>
+                    </div>
+                    <span class="text-xs text-zinc-600 font-mono" x-text="item.time"></span>
+                  </div>
+                  <h3 class="font-bold text-base mb-1" x-text="item.title"></h3>
+                  <p class="text-zinc-400 text-sm" x-text="item.desc"></p>
+                  <template x-if="item.special">
+                    <div class="mt-3 inline-flex items-center gap-1.5 text-xs text-amber-400">
+                      <iconify-icon icon="solar:star-bold" style="font-size:12px"></iconify-icon>
+                      <span x-text="item.special"></span>
+                    </div>
+                  </template>
+                </div>
+              </div>
+            </div>
+          </template>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- VENUE -->
+  <section class="section-raised py-20 px-5">
+    <div class="max-w-5xl mx-auto">
+      <div class="grid md:grid-cols-2 gap-10 items-center">
+        <div>
+          <p class="text-xs font-semibold text-amber-500 tracking-widest mb-3">LOCATION</p>
+          <h2 class="text-3xl md:text-4xl font-bold mb-6">오시는 길</h2>
+          <div class="space-y-4">
+            <div class="flex gap-3 items-start">
+              <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(245,158,11,0.1)">
+                <iconify-icon icon="solar:map-point-bold" style="font-size:18px;color:#f59e0b"></iconify-icon>
+              </div>
+              <div>
+                <div class="font-semibold text-sm mb-0.5">주소</div>
+                <div class="text-zinc-400 text-sm">서울특별시 강남구 테헤란로 123<br>은혜교회 대예배당 (지하 1층 주차장 이용 가능)</div>
+              </div>
+            </div>
+            <div class="flex gap-3 items-start">
+              <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(99,102,241,0.1)">
+                <iconify-icon icon="solar:bus-bold" style="font-size:18px;color:#818cf8"></iconify-icon>
+              </div>
+              <div>
+                <div class="font-semibold text-sm mb-0.5">대중교통</div>
+                <div class="text-zinc-400 text-sm">지하철 2호선 강남역 5번 출구 도보 5분<br>버스 146, 360, 740번 은혜교회 앞 하차</div>
+              </div>
+            </div>
+            <div class="flex gap-3 items-start">
+              <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(34,197,94,0.08)">
+                <iconify-icon icon="solar:phone-bold" style="font-size:18px;color:#4ade80"></iconify-icon>
+              </div>
+              <div>
+                <div class="font-semibold text-sm mb-0.5">문의</div>
+                <div class="text-zinc-400 text-sm">교회 사무실: 02-1234-5678<br>담당 간사: 010-9999-0000</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="bezel">
+          <div class="bezel-inner overflow-hidden rounded-[17px]">
+            <img src="https://picsum.photos/seed/church-map/600/360" alt="교회 위치" class="w-full h-64 object-cover opacity-60">
+            <div class="p-4 flex items-center gap-3">
+              <iconify-icon icon="solar:map-point-bold" style="font-size:18px;color:#f59e0b"></iconify-icon>
+              <span class="text-sm text-zinc-400">은혜교회 대예배당 · 강남구</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FINAL CTA -->
+  <section class="py-24 px-5 relative overflow-hidden">
+    <div class="absolute inset-0 gospel-glow pointer-events-none"></div>
+    <div class="max-w-2xl mx-auto text-center relative z-10">
+      <div class="bezel inline-block mb-6">
+        <div class="bezel-inner px-5 py-2">
+          <span class="text-xs font-semibold text-amber-400">지금 바로 참여하세요</span>
+        </div>
+      </div>
+      <h2 class="text-4xl md:text-5xl font-bold mb-5 leading-tight">
+        당신의 소중한 사람을<br><span class="amber-text">초청해 주세요</span>
+      </h2>
+      <p class="text-zinc-400 text-base mb-10 leading-relaxed">
+        복음의 씨앗이 자라날 수 있도록,<br>당신의 기도와 초청이 누군가의 인생을 바꿀 수 있습니다.
+      </p>
+      <div class="flex flex-wrap items-center justify-center gap-3">
+        <button @click="navigate('login')" class="btn-primary">
+          <div class="ic"><iconify-icon icon="solar:user-plus-bold" style="font-size:13px;color:#000"></iconify-icon></div>
+          성도 전도 관리 시작하기
+        </button>
+        <button @click="navigate('decision')" class="btn-ghost">
+          <iconify-icon icon="solar:heart-bold" style="font-size:15px;color:#f59e0b"></iconify-icon>
+          결단 카드 작성하기
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="border-top:1px solid rgba(255,255,255,0.06);background:#080808">
+    <div class="max-w-5xl mx-auto px-5 py-10 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <div class="flex items-center gap-2">
+        <div class="w-6 h-6 rounded-lg flex items-center justify-center" style="background:linear-gradient(135deg,#f59e0b,#d97706)">
+          <iconify-icon icon="solar:star-bold" style="color:#000;font-size:12px"></iconify-icon>
+        </div>
+        <span class="text-sm font-bold">은혜교회</span>
+        <span class="text-zinc-600 text-sm">· 새생명 축제 2026</span>
+      </div>
+      <div class="text-xs text-zinc-600 text-center">
+        서울시 강남구 테헤란로 123 · 02-1234-5678 · © 2026 은혜교회
+      </div>
+    </div>
+  </footer>
+</div>
+
+<!-- ═══════════════════════ LOGIN VIEW ═══════════════════════ -->
+<div x-show="currentView==='login'" x-cloak class="min-h-[100dvh] flex items-center justify-center px-5 pt-14">
+  <div class="w-full max-w-md aup">
+    <div class="bezel">
+      <div class="bezel-inner p-8">
+        <div class="text-center mb-8">
+          <div class="w-14 h-14 rounded-2xl mx-auto mb-4 flex items-center justify-center" style="background:rgba(245,158,11,0.12)">
+            <iconify-icon icon="solar:user-bold" style="font-size:28px;color:#f59e0b"></iconify-icon>
+          </div>
+          <h1 class="text-2xl font-bold mb-1">성도 로그인</h1>
+          <p class="text-zinc-500 text-sm">전도 관리 시스템에 접속합니다</p>
+        </div>
+
+        <div class="space-y-4">
+          <div>
+            <label class="block text-xs font-semibold text-zinc-400 mb-1.5">아이디</label>
+            <input x-model="loginId" @keyup.enter="login()" type="text" placeholder="아이디를 입력하세요" class="inp">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-zinc-400 mb-1.5">비밀번호</label>
+            <input x-model="loginPw" @keyup.enter="login()" type="password" placeholder="비밀번호를 입력하세요" class="inp">
+          </div>
+
+          <template x-if="loginError">
+            <div class="flex items-center gap-2 text-sm text-red-400 px-3 py-2.5 rounded-lg" style="background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2)">
+              <iconify-icon icon="solar:danger-bold" style="font-size:15px"></iconify-icon>
+              <span x-text="loginError"></span>
+            </div>
+          </template>
+
+          <button @click="login()" class="btn-primary w-full justify-center mt-2">
+            <div class="ic"><iconify-icon icon="solar:login-bold" style="font-size:13px;color:#000"></iconify-icon></div>
+            로그인
+          </button>
+        </div>
+
+        <div class="mt-6 p-4 rounded-xl text-center" style="background:rgba(245,158,11,0.05);border:1px solid rgba(245,158,11,0.15)">
+          <p class="text-xs text-zinc-500">데모 버전 — 아이디/비밀번호 입력 후 로그인</p>
+        </div>
+
+        <button @click="navigate('landing')" class="btn-ghost w-full justify-center mt-3 btn-sm">
+          <iconify-icon icon="solar:arrow-left-bold" style="font-size:14px"></iconify-icon>
+          행사 안내로 돌아가기
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ DASHBOARD VIEW ═══════════════════════ -->
+<div x-show="currentView==='dashboard'" x-cloak class="min-h-[100dvh] pt-20 px-5 pb-16">
+  <div class="max-w-5xl mx-auto">
+    <!-- Header -->
+    <div class="mb-8 aup">
+      <p class="text-xs font-semibold text-amber-500 tracking-widest mb-1">DASHBOARD</p>
+      <h1 class="text-2xl md:text-3xl font-bold">전도 현황 대시보드</h1>
+      <p class="text-zinc-500 text-sm mt-1">새생명 축제 2026 전도 대상자 현황을 한눈에 확인하세요</p>
+    </div>
+
+    <!-- Stats row -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+      <div class="bezel aup d1">
+        <div class="bezel-inner p-5">
+          <div class="flex items-center justify-between mb-3">
+            <div class="stat-icon" style="background:rgba(245,158,11,0.1)">
+              <iconify-icon icon="solar:users-group-two-rounded-bold" style="font-size:20px;color:#f59e0b"></iconify-icon>
+            </div>
+            <span class="badge b-amber text-xs">전체</span>
+          </div>
+          <div class="text-3xl font-bold mb-1" x-text="stats.total">0</div>
+          <div class="text-xs text-zinc-500">전도 대상자</div>
+        </div>
+      </div>
+      <div class="bezel aup d2">
+        <div class="bezel-inner p-5">
+          <div class="flex items-center justify-between mb-3">
+            <div class="stat-icon" style="background:rgba(59,130,246,0.1)">
+              <iconify-icon icon="solar:letter-bold" style="font-size:20px;color:#60a5fa"></iconify-icon>
+            </div>
+            <span class="badge b-blue">초청</span>
+          </div>
+          <div class="text-3xl font-bold mb-1" x-text="stats.invited">0</div>
+          <div class="text-xs text-zinc-500">초청한 분들</div>
+        </div>
+      </div>
+      <div class="bezel aup d3">
+        <div class="bezel-inner p-5">
+          <div class="flex items-center justify-between mb-3">
+            <div class="stat-icon" style="background:rgba(34,197,94,0.08)">
+              <iconify-icon icon="solar:check-circle-bold" style="font-size:20px;color:#4ade80"></iconify-icon>
+            </div>
+            <span class="badge b-green">확인</span>
+          </div>
+          <div class="text-3xl font-bold mb-1" x-text="stats.confirmed">0</div>
+          <div class="text-xs text-zinc-500">참석 확인</div>
+        </div>
+      </div>
+      <div class="bezel aup d4">
+        <div class="bezel-inner p-5">
+          <div class="flex items-center justify-between mb-3">
+            <div class="stat-icon" style="background:rgba(168,85,247,0.1)">
+              <iconify-icon icon="solar:heart-bold" style="font-size:20px;color:#c084fc"></iconify-icon>
+            </div>
+            <span class="badge b-purple">결단</span>
+          </div>
+          <div class="text-3xl font-bold mb-1" x-text="stats.decided">0</div>
+          <div class="text-xs text-zinc-500">결단자</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Progress + Quick actions -->
+    <div class="grid md:grid-cols-3 gap-4 mb-8">
+      <!-- Progress -->
+      <div class="bezel md:col-span-2 aup d2">
+        <div class="bezel-inner p-6">
+          <h3 class="font-bold mb-5 flex items-center gap-2">
+            <iconify-icon icon="solar:chart-bold" style="font-size:18px;color:#f59e0b"></iconify-icon>
+            전도 진행 현황
+          </h3>
+          <div class="space-y-4">
+            <template x-for="(item, i) in progressItems" :key="i">
+              <div>
+                <div class="flex justify-between text-sm mb-1.5">
+                  <span class="text-zinc-300" x-text="item.label"></span>
+                  <span class="text-zinc-500 text-xs" x-text="item.count + '명'"></span>
+                </div>
+                <div class="h-1.5 rounded-full overflow-hidden" style="background:rgba(255,255,255,0.05)">
+                  <div class="prog-bar h-full rounded-full transition-all duration-700" :style="{width: stats.total ? Math.round(item.count/stats.total*100)+'%' : '0%', background: item.color}"></div>
+                </div>
+              </div>
+            </template>
+          </div>
+          <div class="mt-5 pt-4" style="border-top:1px solid rgba(255,255,255,0.05)">
+            <div class="flex items-center gap-2 text-sm text-zinc-400">
+              <iconify-icon icon="solar:star-bold" style="font-size:14px;color:#f59e0b"></iconify-icon>
+              총 기도 횟수: <span class="font-bold text-amber-400" x-text="stats.prayers + '회'"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick actions -->
+      <div class="bezel aup d3">
+        <div class="bezel-inner p-6">
+          <h3 class="font-bold mb-5 flex items-center gap-2">
+            <iconify-icon icon="solar:bolt-bold" style="font-size:18px;color:#f59e0b"></iconify-icon>
+            빠른 실행
+          </h3>
+          <div class="space-y-2.5">
+            <button @click="navigate('targets')" class="btn-ghost w-full justify-start btn-sm gap-3">
+              <iconify-icon icon="solar:user-plus-bold" style="font-size:16px;color:#f59e0b"></iconify-icon>
+              전도 대상자 관리
+            </button>
+            <button @click="navigate('invite')" class="btn-ghost w-full justify-start btn-sm gap-3">
+              <iconify-icon icon="solar:letter-bold" style="font-size:16px;color:#60a5fa"></iconify-icon>
+              초청장 / 문자 발송
+            </button>
+            <button @click="navigate('decision')" class="btn-ghost w-full justify-start btn-sm gap-3">
+              <iconify-icon icon="solar:heart-bold" style="font-size:16px;color:#c084fc"></iconify-icon>
+              결단 카드 (공개용)
+            </button>
+            <button @click="openAddTarget()" class="btn-primary w-full justify-start btn-sm gap-3">
+              <iconify-icon icon="solar:add-circle-bold" style="font-size:16px;color:#000"></iconify-icon>
+              새 대상자 추가
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Recent targets -->
+    <div class="bezel aup d3">
+      <div class="bezel-inner p-6">
+        <div class="flex items-center justify-between mb-5">
+          <h3 class="font-bold flex items-center gap-2">
+            <iconify-icon icon="solar:users-group-two-rounded-bold" style="font-size:18px;color:#f59e0b"></iconify-icon>
+            최근 전도 대상자
+          </h3>
+          <button @click="navigate('targets')" class="btn-ghost btn-sm">전체 보기</button>
+        </div>
+        <div class="overflow-x-auto">
+          <table class="tbl w-full">
+            <thead>
+              <tr>
+                <th class="text-left rounded-tl-lg">이름</th>
+                <th class="text-left">관계</th>
+                <th class="text-left">상태</th>
+                <th class="text-left">마지막 연락</th>
+                <th class="text-left rounded-tr-lg">기도</th>
+              </tr>
+            </thead>
+            <tbody>
+              <template x-for="t in targets.slice(0,5)" :key="t.id">
+                <tr class="tbl-row">
+                  <td class="font-medium" x-text="t.name"></td>
+                  <td class="text-zinc-500 text-xs" x-text="t.relationship"></td>
+                  <td><span class="badge" :class="badgeClass(t.status)" x-text="t.status"></span></td>
+                  <td class="text-zinc-500 text-xs" x-text="t.lastContact"></td>
+                  <td>
+                    <button @click="incrementPrayer(t.id)" class="flex items-center gap-1 text-xs text-amber-400 hover:text-amber-300">
+                      <iconify-icon icon="solar:star-bold" style="font-size:12px"></iconify-icon>
+                      <span x-text="t.prayerCount || 0"></span>
+                    </button>
+                  </td>
+                </tr>
+              </template>
+              <template x-if="targets.length === 0">
+                <tr>
+                  <td colspan="5" class="text-center text-zinc-600 py-8">
+                    <iconify-icon icon="solar:users-group-two-rounded-bold" style="font-size:32px;color:#3f3f46;display:block;margin:0 auto 8px"></iconify-icon>
+                    아직 전도 대상자가 없습니다
+                  </td>
+                </tr>
+              </template>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ TARGETS VIEW ═══════════════════════ -->
+<div x-show="currentView==='targets'" x-cloak class="min-h-[100dvh] pt-20 px-5 pb-16">
+  <div class="max-w-5xl mx-auto">
+    <!-- Header -->
+    <div class="flex flex-wrap items-center justify-between gap-4 mb-8">
+      <div>
+        <p class="text-xs font-semibold text-amber-500 tracking-widest mb-1">EVANGELISM</p>
+        <h1 class="text-2xl md:text-3xl font-bold">전도 대상자 관리</h1>
+      </div>
+      <button @click="openAddTarget()" class="btn-primary">
+        <div class="ic"><iconify-icon icon="solar:user-plus-bold" style="font-size:13px;color:#000"></iconify-icon></div>
+        새 대상자 추가
+      </button>
+    </div>
+
+    <!-- Search & Filter -->
+    <div class="flex flex-wrap gap-3 mb-6">
+      <div class="relative flex-1 min-w-[200px]">
+        <iconify-icon icon="solar:magnifer-bold" style="font-size:16px;color:#52525b;position:absolute;left:12px;top:50%;transform:translateY(-50%)"></iconify-icon>
+        <input x-model="targetSearch" type="text" placeholder="이름 또는 연락처 검색" class="inp pl-10">
+      </div>
+      <select x-model="targetFilter" class="inp w-auto min-w-[140px]">
+        <option value="all">전체 상태</option>
+        <option value="초청전">초청전</option>
+        <option value="초청함">초청함</option>
+        <option value="응답대기">응답 대기</option>
+        <option value="참석확인">참석 확인</option>
+        <option value="결단">결단</option>
+      </select>
+    </div>
+
+    <!-- Stats mini row -->
+    <div class="grid grid-cols-5 gap-2 mb-6">
+      <template x-for="(s, i) in statusSummary" :key="i">
+        <button @click="targetFilter = s.value" class="bezel cursor-pointer group" :class="targetFilter===s.value?'ring-1 ring-amber-500/50':''">
+          <div class="bezel-inner p-3 text-center">
+            <div class="text-xl font-bold" x-text="s.count"></div>
+            <div class="text-xs mt-0.5" :class="s.textColor" x-text="s.label"></div>
+          </div>
+        </button>
+      </template>
+    </div>
+
+    <!-- Table -->
+    <div class="bezel">
+      <div class="bezel-inner overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="tbl w-full">
+            <thead>
+              <tr>
+                <th class="text-left">이름</th>
+                <th class="text-left">연락처</th>
+                <th class="text-left">관계</th>
+                <th class="text-left">상태</th>
+                <th class="text-left">초청 횟수</th>
+                <th class="text-left">기도</th>
+                <th class="text-left">메모</th>
+                <th class="text-left">관리</th>
+              </tr>
+            </thead>
+            <tbody>
+              <template x-for="t in filteredTargets" :key="t.id">
+                <tr class="tbl-row">
+                  <td class="font-semibold" x-text="t.name"></td>
+                  <td class="text-zinc-400 text-xs font-mono" x-text="t.phone"></td>
+                  <td class="text-zinc-500 text-xs" x-text="t.relationship"></td>
+                  <td><span class="badge" :class="badgeClass(t.status)" x-text="t.status"></span></td>
+                  <td>
+                    <span class="flex items-center gap-1 text-xs" :class="(t.inviteCount||0)>0?'text-blue-400':'text-zinc-600'">
+                      <iconify-icon icon="solar:letter-bold" style="font-size:12px"></iconify-icon>
+                      <span x-text="(t.inviteCount||0)+'회'"></span>
+                    </span>
+                  </td>
+                  <td>
+                    <button @click="incrementPrayer(t.id)" class="flex items-center gap-1 text-xs text-amber-400 hover:text-amber-300 transition-colors">
+                      <iconify-icon icon="solar:star-bold" style="font-size:12px"></iconify-icon>
+                      <span x-text="t.prayerCount||0"></span>
+                    </button>
+                  </td>
+                  <td class="max-w-[160px]">
+                    <span class="text-zinc-500 text-xs truncate block" x-text="t.notes||'—'"></span>
+                  </td>
+                  <td>
+                    <div class="flex items-center gap-1.5">
+                      <button @click="editTarget(t)" class="btn-ghost btn-sm px-2.5 py-1.5">
+                        <iconify-icon icon="solar:pen-bold" style="font-size:13px"></iconify-icon>
+                      </button>
+                      <button @click="deleteTarget(t.id)" class="btn-ghost btn-sm btn-danger px-2.5 py-1.5">
+                        <iconify-icon icon="solar:trash-bin-trash-bold" style="font-size:13px"></iconify-icon>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </template>
+              <template x-if="filteredTargets.length === 0">
+                <tr>
+                  <td colspan="8" class="text-center py-14">
+                    <iconify-icon icon="solar:users-group-two-rounded-bold" style="font-size:36px;color:#3f3f46;display:block;margin:0 auto 10px"></iconify-icon>
+                    <p class="text-zinc-600 text-sm">해당 조건의 대상자가 없습니다</p>
+                  </td>
+                </tr>
+              </template>
+            </tbody>
+          </table>
+        </div>
+        <div class="px-4 py-3 flex items-center justify-between" style="border-top:1px solid rgba(255,255,255,0.04)">
+          <span class="text-xs text-zinc-600" x-text="filteredTargets.length + '명 표시 중 (전체 ' + targets.length + '명)'"></span>
+          <button @click="navigate('invite')" class="btn-primary btn-sm">
+            <iconify-icon icon="solar:letter-bold" style="font-size:13px;color:#000"></iconify-icon>
+            초청장 발송
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ INVITE VIEW ═══════════════════════ -->
+<div x-show="currentView==='invite'" x-cloak class="min-h-[100dvh] pt-20 px-5 pb-16">
+  <div class="max-w-5xl mx-auto">
+    <div class="mb-8">
+      <p class="text-xs font-semibold text-amber-500 tracking-widest mb-1">INVITATION</p>
+      <h1 class="text-2xl md:text-3xl font-bold">초청장 & 문자 발송</h1>
+      <p class="text-zinc-500 text-sm mt-1">전도 대상자에게 맞춤 초청장을 발송하세요</p>
+    </div>
+
+    <!-- Success state -->
+    <template x-if="inviteSent">
+      <div class="bezel mb-6 aup">
+        <div class="bezel-inner p-6 text-center">
+          <div class="w-16 h-16 rounded-full mx-auto mb-4 flex items-center justify-center" style="background:rgba(34,197,94,0.12)">
+            <iconify-icon icon="solar:check-circle-bold" style="font-size:36px;color:#4ade80"></iconify-icon>
+          </div>
+          <h3 class="text-xl font-bold mb-2 text-green-400">발송 완료!</h3>
+          <p class="text-zinc-400 text-sm" x-text="selectedTargets.length + '명에게 ' + (inviteTemplate==='letter'?'이메일 초청장':'문자 메시지') + '이 발송되었습니다.'"></p>
+        </div>
+      </div>
+    </template>
+
+    <div class="grid md:grid-cols-2 gap-6">
+      <!-- Left: Settings -->
+      <div class="space-y-5">
+        <!-- Template select -->
+        <div class="bezel">
+          <div class="bezel-inner p-5">
+            <h3 class="font-bold mb-4 flex items-center gap-2">
+              <iconify-icon icon="solar:document-bold" style="font-size:16px;color:#f59e0b"></iconify-icon>
+              발송 형식 선택
+            </h3>
+            <div class="grid grid-cols-2 gap-3">
+              <button @click="inviteTemplate='letter'" class="p-4 rounded-xl text-left transition-all border" :class="inviteTemplate==='letter' ? 'border-amber-500/40 bg-amber-500/5' : 'border-white/8 bg-white/2 hover:bg-white/4'">
+                <iconify-icon icon="solar:letter-bold" :style="inviteTemplate==='letter'?'font-size:22px;color:#f59e0b':'font-size:22px;color:#52525b'"></iconify-icon>
+                <div class="mt-2 font-semibold text-sm" :class="inviteTemplate==='letter'?'text-amber-400':'text-zinc-400'">이메일 초청장</div>
+                <div class="text-xs text-zinc-600 mt-0.5">정성스러운 초청 편지</div>
+              </button>
+              <button @click="inviteTemplate='sms'" class="p-4 rounded-xl text-left transition-all border" :class="inviteTemplate==='sms' ? 'border-blue-500/40 bg-blue-500/5' : 'border-white/8 bg-white/2 hover:bg-white/4'">
+                <iconify-icon icon="solar:chat-round-dots-bold" :style="inviteTemplate==='sms'?'font-size:22px;color:#60a5fa':'font-size:22px;color:#52525b'"></iconify-icon>
+                <div class="mt-2 font-semibold text-sm" :class="inviteTemplate==='sms'?'text-blue-400':'text-zinc-400'">문자 메시지</div>
+                <div class="text-xs text-zinc-600 mt-0.5">간결한 SMS 초청</div>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sender name -->
+        <div class="bezel">
+          <div class="bezel-inner p-5">
+            <h3 class="font-bold mb-3 flex items-center gap-2">
+              <iconify-icon icon="solar:user-bold" style="font-size:16px;color:#f59e0b"></iconify-icon>
+              발신자 정보
+            </h3>
+            <input x-model="senderName" type="text" placeholder="내 이름을 입력하세요 (예: 김성도)" class="inp">
+          </div>
+        </div>
+
+        <!-- Target select -->
+        <div class="bezel">
+          <div class="bezel-inner p-5">
+            <div class="flex items-center justify-between mb-3">
+              <h3 class="font-bold flex items-center gap-2">
+                <iconify-icon icon="solar:users-group-two-rounded-bold" style="font-size:16px;color:#f59e0b"></iconify-icon>
+                받는 분 선택
+              </h3>
+              <div class="flex gap-2">
+                <button @click="selectAllTargets()" class="btn-ghost btn-sm text-xs">전체 선택</button>
+                <button @click="clearSelection()" class="btn-ghost btn-sm text-xs">초기화</button>
+              </div>
+            </div>
+            <div class="space-y-1.5 max-h-48 overflow-y-auto pr-1">
+              <template x-for="t in targets" :key="t.id">
+                <label class="flex items-center gap-3 p-2.5 rounded-lg cursor-pointer hover:bg-white/3 transition-colors">
+                  <input type="checkbox" :checked="selectedTargets.includes(t.id)" @change="toggleSelectTarget(t.id)" class="w-4 h-4 cursor-pointer" style="accent-color:#f59e0b">
+                  <div class="flex-1 min-w-0">
+                    <span class="font-medium text-sm" x-text="t.name"></span>
+                    <span class="text-zinc-500 text-xs ml-2" x-text="t.relationship"></span>
+                  </div>
+                  <span class="badge flex-shrink-0" :class="badgeClass(t.status)" x-text="t.status"></span>
+                </label>
+              </template>
+              <template x-if="targets.length===0">
+                <div class="text-center py-6 text-zinc-600 text-sm">
+                  전도 대상자를 먼저 추가해주세요
+                </div>
+              </template>
+            </div>
+            <div class="mt-3 pt-3 text-xs text-zinc-500" style="border-top:1px solid rgba(255,255,255,0.05)" x-text="selectedTargets.length + '명 선택됨'"></div>
+          </div>
+        </div>
+
+        <button @click="sendInvite()" class="btn-primary w-full justify-center">
+          <div class="ic"><iconify-icon :icon="inviteTemplate==='letter'?'solar:letter-bold':'solar:chat-round-dots-bold'" style="font-size:14px;color:#000"></iconify-icon></div>
+          <span x-text="(inviteTemplate==='letter'?'이메일 초청장':'문자 메시지') + ' 발송하기 (' + selectedTargets.length + '명)'"></span>
+        </button>
+      </div>
+
+      <!-- Right: Preview -->
+      <div class="bezel h-fit sticky top-20">
+        <div class="bezel-inner p-5">
+          <h3 class="font-bold mb-4 flex items-center gap-2">
+            <iconify-icon icon="solar:eye-bold" style="font-size:16px;color:#f59e0b"></iconify-icon>
+            미리보기
+            <span class="badge b-amber ml-auto text-xs" x-text="inviteTemplate==='letter'?'이메일 초청장':'문자 메시지'"></span>
+          </h3>
+          <div class="preview-box" x-text="inviteTemplate==='letter' ? getLetterTemplate(selectedTargets.length>0 ? targets.find(t=>selectedTargets.includes(t.id))?.name||'○○○' : '○○○') : getSMSTemplate(selectedTargets.length>0 ? targets.find(t=>selectedTargets.includes(t.id))?.name||'○○○' : '○○○')"></div>
+          <div class="mt-3 p-3 rounded-xl text-xs text-zinc-500 flex items-center gap-2" style="background:rgba(255,255,255,0.03)">
+            <iconify-icon icon="solar:info-circle-bold" style="font-size:14px;color:#52525b"></iconify-icon>
+            각 수신자의 이름으로 자동 발송됩니다
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ DECISION CARD VIEW ═══════════════════════ -->
+<div x-show="currentView==='decision'" x-cloak class="min-h-[100dvh] pt-20 px-5 pb-16">
+  <div class="max-w-xl mx-auto">
+
+    <!-- Submitted state -->
+    <template x-if="decisionSubmitted">
+      <div class="text-center py-16 aup">
+        <div class="w-20 h-20 rounded-full mx-auto mb-6 flex items-center justify-center" style="background:rgba(245,158,11,0.12);border:2px solid rgba(245,158,11,0.3)">
+          <iconify-icon icon="solar:heart-bold" style="font-size:40px;color:#f59e0b"></iconify-icon>
+        </div>
+        <h2 class="text-3xl font-bold mb-3 amber-text">결단을 환영합니다!</h2>
+        <p class="text-zinc-400 leading-relaxed mb-8">
+          소중한 결단을 해주셔서 감사합니다.<br>담당 사역자가 곧 연락드릴 것입니다.
+        </p>
+        <div class="bezel mb-8">
+          <div class="bezel-inner p-5 text-left space-y-2">
+            <div class="flex items-center gap-2 text-sm">
+              <iconify-icon icon="solar:user-bold" style="font-size:14px;color:#f59e0b"></iconify-icon>
+              <span class="text-zinc-400">이름:</span>
+              <span class="font-medium" x-text="decisionForm.name"></span>
+            </div>
+            <div class="flex items-center gap-2 text-sm">
+              <iconify-icon icon="solar:phone-bold" style="font-size:14px;color:#f59e0b"></iconify-icon>
+              <span class="text-zinc-400">연락처:</span>
+              <span class="font-medium" x-text="decisionForm.phone"></span>
+            </div>
+          </div>
+        </div>
+        <div class="flex flex-col gap-3">
+          <button @click="decisionSubmitted=false; decisionForm={name:'',phone:'',email:'',decision:false,pray:false,baptism:false,cell:false,notes:''}" class="btn-primary w-full justify-center">
+            새로운 결단 작성
+          </button>
+          <button @click="navigate('landing')" class="btn-ghost w-full justify-center">
+            행사 안내로 돌아가기
+          </button>
+        </div>
+      </div>
+    </template>
+
+    <template x-if="!decisionSubmitted">
+      <div>
+        <!-- Gospel message -->
+        <div class="text-center mb-10">
+          <div class="gospel-glow">
+            <p class="text-xs font-semibold text-amber-500 tracking-widest mb-3">DECISION CARD</p>
+            <h1 class="text-3xl md:text-4xl font-bold mb-4">결단 카드</h1>
+            <p class="text-zinc-400 text-sm leading-relaxed max-w-md mx-auto">
+              복음 안에서 새로운 결단을 하신 분들을 위한 카드입니다.<br>
+              오늘 당신의 소중한 결단을 기록해 주세요.
+            </p>
+          </div>
+        </div>
+
+        <!-- Gospel summary -->
+        <div class="bezel mb-6">
+          <div class="bezel-inner p-6">
+            <div class="flex items-center gap-3 mb-4">
+              <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(245,158,11,0.1)">
+                <iconify-icon icon="solar:book-bold" style="font-size:18px;color:#f59e0b"></iconify-icon>
+              </div>
+              <h3 class="font-bold">복음의 핵심</h3>
+            </div>
+            <div class="space-y-3 text-sm text-zinc-400 leading-relaxed">
+              <p>🌿 <strong class="text-zinc-200">하나님이 세상을 이처럼 사랑하사</strong> 독생자를 주셨으니, 이는 저를 믿는 자마다 멸망치 않고 영생을 얻게 하려 하심이라. <span class="text-amber-500/70 text-xs">(요한복음 3:16)</span></p>
+              <div class="h-px" style="background:rgba(255,255,255,0.05)"></div>
+              <p>하나님은 당신을 사랑하시며, 당신이 그분과 함께하기를 원하십니다. 예수 그리스도께서 우리의 죄 값을 대신 치르시고 부활하셨습니다. 오늘 그분을 구주로 영접하시겠습니까?</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Decision Form -->
+        <div class="bezel">
+          <div class="bezel-inner p-6 space-y-5">
+            <h3 class="font-bold flex items-center gap-2 mb-1">
+              <iconify-icon icon="solar:pen-bold" style="font-size:16px;color:#f59e0b"></iconify-icon>
+              결단 정보 입력
+            </h3>
+
+            <div class="grid grid-cols-2 gap-3">
+              <div>
+                <label class="block text-xs font-semibold text-zinc-400 mb-1.5">이름 *</label>
+                <input x-model="decisionForm.name" type="text" placeholder="홍길동" class="inp">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold text-zinc-400 mb-1.5">연락처 *</label>
+                <input x-model="decisionForm.phone" type="tel" placeholder="010-0000-0000" class="inp">
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-zinc-400 mb-1.5">이메일</label>
+              <input x-model="decisionForm.email" type="email" placeholder="이메일 주소 (선택)" class="inp">
+            </div>
+
+            <!-- Decision checkboxes -->
+            <div>
+              <label class="block text-xs font-semibold text-zinc-400 mb-3">결단 사항 (해당하는 것을 모두 선택하세요)</label>
+              <div class="space-y-3">
+                <label class="flex items-start gap-3 p-3.5 rounded-xl cursor-pointer transition-all border" :class="decisionForm.decision?'border-amber-500/30 bg-amber-500/5':'border-white/6 hover:bg-white/2'" style="border-style:solid">
+                  <input type="checkbox" x-model="decisionForm.decision" class="mt-0.5 flex-shrink-0" style="accent-color:#f59e0b;width:16px;height:16px">
+                  <div>
+                    <div class="font-semibold text-sm">예수님을 구주로 영접합니다</div>
+                    <div class="text-xs text-zinc-500 mt-0.5">오늘 처음으로 예수님을 나의 구주로 믿기로 결단합니다</div>
+                  </div>
+                </label>
+                <label class="flex items-start gap-3 p-3.5 rounded-xl cursor-pointer transition-all border" :class="decisionForm.pray?'border-blue-500/30 bg-blue-500/5':'border-white/6 hover:bg-white/2'" style="border-style:solid">
+                  <input type="checkbox" x-model="decisionForm.pray" class="mt-0.5 flex-shrink-0" style="accent-color:#60a5fa;width:16px;height:16px">
+                  <div>
+                    <div class="font-semibold text-sm">기도 응답을 경험했습니다</div>
+                    <div class="text-xs text-zinc-500 mt-0.5">이번 축제에서 기도 응답을 받았습니다</div>
+                  </div>
+                </label>
+                <label class="flex items-start gap-3 p-3.5 rounded-xl cursor-pointer transition-all border" :class="decisionForm.baptism?'border-purple-500/30 bg-purple-500/5':'border-white/6 hover:bg-white/2'" style="border-style:solid">
+                  <input type="checkbox" x-model="decisionForm.baptism" class="mt-0.5 flex-shrink-0" style="accent-color:#c084fc;width:16px;height:16px">
+                  <div>
+                    <div class="font-semibold text-sm">세례를 받고 싶습니다</div>
+                    <div class="text-xs text-zinc-500 mt-0.5">세례 교육 및 세례식에 대한 안내를 받겠습니다</div>
+                  </div>
+                </label>
+                <label class="flex items-start gap-3 p-3.5 rounded-xl cursor-pointer transition-all border" :class="decisionForm.cell?'border-green-500/30 bg-green-500/5':'border-white/6 hover:bg-white/2'" style="border-style:solid">
+                  <input type="checkbox" x-model="decisionForm.cell" class="mt-0.5 flex-shrink-0" style="accent-color:#4ade80;width:16px;height:16px">
+                  <div>
+                    <div class="font-semibold text-sm">소그룹(셀)에 참여하겠습니다</div>
+                    <div class="text-xs text-zinc-500 mt-0.5">신앙 공동체 소그룹 모임에 참여를 원합니다</div>
+                  </div>
+                </label>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-zinc-400 mb-1.5">기도 제목 / 전하고 싶은 말</label>
+              <textarea x-model="decisionForm.notes" placeholder="담당 사역자에게 전하고 싶은 기도 제목이나 이야기를 남겨주세요." class="inp"></textarea>
+            </div>
+
+            <button @click="submitDecision()" class="btn-primary w-full justify-center">
+              <div class="ic"><iconify-icon icon="solar:heart-bold" style="font-size:14px;color:#000"></iconify-icon></div>
+              결단 카드 제출하기
+            </button>
+
+            <p class="text-xs text-center text-zinc-600">입력하신 정보는 교회 사역에만 사용됩니다</p>
+          </div>
+        </div>
+      </div>
+    </template>
+  </div>
+</div>
+
+<!-- ═══════════════════════ TARGET MODAL ═══════════════════════ -->
+<div x-show="showTargetModal" x-cloak
+     class="modal-overlay fixed inset-0 z-[100] flex items-center justify-center p-4"
+     @click.self="showTargetModal=false">
+  <div class="bezel w-full max-w-md aup" @click.stop>
+    <div class="bezel-inner p-6">
+      <div class="flex items-center justify-between mb-5">
+        <h3 class="font-bold text-lg" x-text="editingTarget ? '전도 대상자 수정' : '새 전도 대상자 추가'"></h3>
+        <button @click="showTargetModal=false" class="w-8 h-8 rounded-full flex items-center justify-center hover:bg-white/5 transition-colors">
+          <iconify-icon icon="solar:close-bold" style="font-size:16px;color:#71717a"></iconify-icon>
+        </button>
+      </div>
+      <div class="space-y-4">
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-zinc-400 mb-1.5">이름 *</label>
+            <input x-model="targetForm.name" type="text" placeholder="홍길동" class="inp">
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-zinc-400 mb-1.5">연락처 *</label>
+            <input x-model="targetForm.phone" type="tel" placeholder="010-0000-0000" class="inp">
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-semibold text-zinc-400 mb-1.5">관계</label>
+            <select x-model="targetForm.relationship" class="inp">
+              <option>가족</option>
+              <option>친구</option>
+              <option>직장동료</option>
+              <option>이웃</option>
+              <option>학교동료</option>
+              <option>기타</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-zinc-400 mb-1.5">상태</label>
+            <select x-model="targetForm.status" class="inp">
+              <option>초청전</option>
+              <option>초청함</option>
+              <option>응답대기</option>
+              <option>참석확인</option>
+              <option>결단</option>
+            </select>
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-zinc-400 mb-1.5">메모</label>
+          <textarea x-model="targetForm.notes" placeholder="특이사항, 기도 제목 등을 입력하세요" class="inp" style="min-height:70px"></textarea>
+        </div>
+        <div class="flex gap-3 pt-1">
+          <button @click="showTargetModal=false" class="btn-ghost flex-1 justify-center btn-sm">취소</button>
+          <button @click="saveTarget()" class="btn-primary flex-1 justify-center btn-sm">
+            <iconify-icon :icon="editingTarget?'solar:pen-bold':'solar:add-circle-bold'" style="font-size:14px;color:#000"></iconify-icon>
+            <span x-text="editingTarget?'수정 완료':'추가하기'"></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════ TOAST NOTIFICATIONS ═══════════════════════ -->
+<div class="fixed bottom-6 right-5 z-[200] space-y-2.5" style="pointer-events:none">
+  <template x-for="toast in toasts" :key="toast.id">
+    <div class="ain flex items-center gap-3 px-4 py-3 rounded-xl shadow-2xl" style="pointer-events:all;max-width:320px" :class="toast.type==='success'?'bg-zinc-900 border border-green-500/25':'bg-zinc-900 border border-red-500/25'">
+      <iconify-icon :icon="toast.type==='success'?'solar:check-circle-bold':'solar:danger-bold'" :style="'font-size:18px;color:' + (toast.type==='success'?'#4ade80':'#f87171')"></iconify-icon>
+      <span class="text-sm font-medium" x-text="toast.message"></span>
+    </div>
+  </template>
+</div>
+
+<!-- ═══════════════════════ ALPINE.JS APP ═══════════════════════ -->
+<script>
+function gospel() {
+  return {
+    currentView: 'landing',
+    isLoggedIn: false,
+    countdown: { days: 0, hours: 0, minutes: 0, seconds: 0 },
+    toasts: [],
+    targets: [],
+    showTargetModal: false,
+    editingTarget: null,
+    targetSearch: '',
+    targetFilter: 'all',
+    targetForm: { name: '', phone: '', relationship: '친구', status: '초청전', notes: '' },
+    inviteTemplate: 'letter',
+    selectedTargets: [],
+    senderName: '',
+    inviteSent: false,
+    loginId: '',
+    loginPw: '',
+    loginError: '',
+    decisionForm: { name: '', phone: '', email: '', decision: false, pray: false, baptism: false, cell: false, notes: '' },
+    decisionSubmitted: false,
+
+    schedule: [
+      { date: '5/17(일)', day: '개막일', time: '오후 5시 / 7시', title: '개막 예배 & 새생명의 밤', desc: '새생명 축제의 시작을 알리는 개막 예배. 찬양팀의 특별 공연과 함께합니다.', special: '특별 찬양 — 워십팀 공연' },
+      { date: '5/18(월)', day: '2일차', time: '저녁 7시', title: '치유와 회복의 밤', desc: '삶의 상처와 아픔을 하나님 앞에 내려놓는 치유 집회.', special: null },
+      { date: '5/19(화)', day: '3일차', time: '저녁 7시', title: '가족과 함께하는 저녁', desc: '가족과 소중한 분들을 모시고 함께 하는 특별한 시간. 어린이 프로그램도 함께 운영됩니다.', special: '가족 초청의 밤 — 어린이 동반 가능' },
+      { date: '5/20(수)', day: '4일차', time: '저녁 7시', title: '찬양과 경배의 밤', desc: '온 마음을 다한 찬양 예배. 특별 워십 밴드가 함께합니다.', special: null },
+      { date: '5/21(목)', day: '5일차', time: '저녁 7시', title: '결단의 밤', desc: '복음 앞에서 삶의 결단을 내리는 특별한 밤. 개인 기도 및 상담 시간이 준비됩니다.', special: '결단자 기도 — 1:1 개인 상담' },
+      { date: '5/22(금)', day: '폐막일', time: '저녁 7시', title: '폐막 감사 예배 & 셀 모임 소개', desc: '6일간의 축제를 마무리하며 감사 예배를 드립니다. 소그룹 공동체 가입을 안내합니다.', special: '소그룹(셀) 가입 안내' },
+    ],
+
+    init() {
+      const stored = localStorage.getItem('gospel_targets');
+      if (stored) {
+        try { this.targets = JSON.parse(stored); } catch(e) { this.targets = this.demoTargets(); }
+      } else {
+        this.targets = this.demoTargets();
+        this.saveTargets();
+      }
+      const li = sessionStorage.getItem('gospel_loggedIn');
+      if (li) this.isLoggedIn = true;
+      this.updateCountdown();
+      setInterval(() => this.updateCountdown(), 1000);
+    },
+
+    demoTargets() {
+      return [
+        { id: '1', name: '김민준', phone: '010-1234-5678', relationship: '친구', status: '초청함', notes: '직장 동료, 교회에 관심 있음', inviteCount: 2, lastContact: '2026-04-10', createdAt: '2026-03-15', prayerCount: 5 },
+        { id: '2', name: '이서연', phone: '010-9876-5432', relationship: '가족', status: '응답대기', notes: '언니, 가끔 교회 이야기 나눔', inviteCount: 1, lastContact: '2026-04-08', createdAt: '2026-03-20', prayerCount: 10 },
+        { id: '3', name: '박지호', phone: '010-5555-4444', relationship: '이웃', status: '초청전', notes: '옆집 주민, 최근 이사 옴', inviteCount: 0, lastContact: '—', createdAt: '2026-04-01', prayerCount: 3 },
+        { id: '4', name: '최예은', phone: '010-7777-8888', relationship: '직장동료', status: '참석확인', notes: '매우 적극적으로 참석 의사 밝힘', inviteCount: 3, lastContact: '2026-04-11', createdAt: '2026-02-28', prayerCount: 8 },
+        { id: '5', name: '정하윤', phone: '010-3333-2222', relationship: '학교동료', status: '초청전', notes: '대학교 동기', inviteCount: 0, lastContact: '—', createdAt: '2026-04-05', prayerCount: 2 },
+      ];
+    },
+
+    saveTargets() {
+      localStorage.setItem('gospel_targets', JSON.stringify(this.targets));
+    },
+
+    navigate(view) {
+      const memberViews = ['dashboard', 'targets', 'invite'];
+      if (memberViews.includes(view) && !this.isLoggedIn) {
+        this.pendingView = view;
+        this.currentView = 'login';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        return;
+      }
+      this.currentView = view;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    },
+
+    login() {
+      if (!this.loginId || !this.loginPw) {
+        this.loginError = '아이디와 비밀번호를 입력해주세요.';
+        return;
+      }
+      this.isLoggedIn = true;
+      this.loginError = '';
+      sessionStorage.setItem('gospel_loggedIn', '1');
+      const dest = this.pendingView || 'dashboard';
+      this.pendingView = null;
+      this.navigate(dest);
+      this.addToast('로그인 되었습니다. 환영합니다! 🎉', 'success');
+    },
+
+    logout() {
+      this.isLoggedIn = false;
+      sessionStorage.removeItem('gospel_loggedIn');
+      this.navigate('landing');
+      this.addToast('로그아웃 되었습니다.', 'success');
+    },
+
+    updateCountdown() {
+      const eventDate = new Date('2026-05-17T17:00:00');
+      const diff = eventDate - new Date();
+      if (diff > 0) {
+        this.countdown.days = Math.floor(diff / 86400000);
+        this.countdown.hours = Math.floor((diff % 86400000) / 3600000);
+        this.countdown.minutes = Math.floor((diff % 3600000) / 60000);
+        this.countdown.seconds = Math.floor((diff % 60000) / 1000);
+      }
+    },
+
+    openAddTarget() {
+      this.editingTarget = null;
+      this.targetForm = { name: '', phone: '', relationship: '친구', status: '초청전', notes: '' };
+      this.showTargetModal = true;
+    },
+
+    editTarget(t) {
+      this.editingTarget = t;
+      this.targetForm = { ...t };
+      this.showTargetModal = true;
+    },
+
+    saveTarget() {
+      if (!this.targetForm.name.trim() || !this.targetForm.phone.trim()) {
+        this.addToast('이름과 연락처를 입력해주세요.', 'error');
+        return;
+      }
+      if (this.editingTarget) {
+        const idx = this.targets.findIndex(t => t.id === this.editingTarget.id);
+        if (idx !== -1) this.targets[idx] = { ...this.targets[idx], ...this.targetForm };
+      } else {
+        this.targets.unshift({
+          id: Date.now().toString(),
+          ...this.targetForm,
+          inviteCount: 0,
+          lastContact: '—',
+          createdAt: new Date().toISOString().split('T')[0],
+          prayerCount: 0,
+        });
+      }
+      this.saveTargets();
+      this.showTargetModal = false;
+      this.addToast(this.editingTarget ? '수정되었습니다.' : '새 전도 대상자가 추가되었습니다! 🙏', 'success');
+    },
+
+    deleteTarget(id) {
+      if (!confirm('정말 삭제하시겠습니까?')) return;
+      this.targets = this.targets.filter(t => t.id !== id);
+      this.selectedTargets = this.selectedTargets.filter(sid => sid !== id);
+      this.saveTargets();
+      this.addToast('삭제되었습니다.', 'success');
+    },
+
+    incrementPrayer(id) {
+      const t = this.targets.find(t => t.id === id);
+      if (t) { t.prayerCount = (t.prayerCount || 0) + 1; this.saveTargets(); }
+    },
+
+    get filteredTargets() {
+      let list = [...this.targets];
+      if (this.targetFilter !== 'all') list = list.filter(t => t.status === this.targetFilter);
+      if (this.targetSearch.trim()) {
+        const q = this.targetSearch.toLowerCase();
+        list = list.filter(t => t.name.toLowerCase().includes(q) || t.phone.includes(q));
+      }
+      return list;
+    },
+
+    get stats() {
+      return {
+        total: this.targets.length,
+        invited: this.targets.filter(t => t.status !== '초청전').length,
+        confirmed: this.targets.filter(t => t.status === '참석확인').length,
+        decided: this.targets.filter(t => t.status === '결단').length,
+        prayers: this.targets.reduce((s, t) => s + (t.prayerCount || 0), 0),
+      };
+    },
+
+    get progressItems() {
+      const s = this.stats;
+      return [
+        { label: '초청한 분들', count: s.invited, color: 'linear-gradient(90deg,#60a5fa,#3b82f6)' },
+        { label: '참석 확인', count: s.confirmed, color: 'linear-gradient(90deg,#4ade80,#22c55e)' },
+        { label: '결단자', count: s.decided, color: 'linear-gradient(90deg,#c084fc,#a855f7)' },
+      ];
+    },
+
+    get statusSummary() {
+      const statuses = ['초청전','초청함','응답대기','참석확인','결단'];
+      const colors = ['text-zinc-400','text-blue-400','text-amber-400','text-green-400','text-purple-400'];
+      return [
+        { label: '전체', value: 'all', count: this.targets.length, textColor: 'text-amber-400' },
+        ...statuses.map((s, i) => ({
+          label: s, value: s,
+          count: this.targets.filter(t => t.status === s).length,
+          textColor: colors[i],
+        })),
+      ];
+    },
+
+    badgeClass(status) {
+      return { '초청전': 'b-gray', '초청함': 'b-blue', '응답대기': 'b-amber', '참석확인': 'b-green', '결단': 'b-purple' }[status] || 'b-gray';
+    },
+
+    toggleSelectTarget(id) {
+      const i = this.selectedTargets.indexOf(id);
+      if (i === -1) this.selectedTargets.push(id);
+      else this.selectedTargets.splice(i, 1);
+    },
+
+    selectAllTargets() { this.selectedTargets = this.targets.map(t => t.id); },
+    clearSelection() { this.selectedTargets = []; },
+
+    sendInvite() {
+      if (!this.selectedTargets.length) { this.addToast('받는 분을 선택해주세요.', 'error'); return; }
+      this.selectedTargets.forEach(id => {
+        const t = this.targets.find(t => t.id === id);
+        if (t) {
+          t.inviteCount = (t.inviteCount || 0) + 1;
+          t.lastContact = new Date().toISOString().split('T')[0];
+          if (t.status === '초청전') t.status = '초청함';
+        }
+      });
+      this.saveTargets();
+      const count = this.selectedTargets.length;
+      const type = this.inviteTemplate === 'letter' ? '이메일 초청장' : '문자 메시지';
+      this.inviteSent = true;
+      this.addToast(`${count}명에게 ${type}이 발송되었습니다! ✉️`, 'success');
+      setTimeout(() => { this.inviteSent = false; this.selectedTargets = []; }, 5000);
+    },
+
+    getLetterTemplate(name) {
+      const sender = this.senderName || '성도';
+      return `사랑하는 ${name}님께,
+
+안녕하세요! ${sender}입니다.
+이 편지를 드리는 것은 당신을 특별한 자리에 초청하고 싶어서입니다.
+
+✨ 새생명 축제 2026 ✨
+    "새 생명, 새 시작"
+
+📅 일시: 2026년 5월 17일(일) ~ 22일(금)
+         매일 저녁 7시
+📍 장소: 은혜교회 대예배당
+         서울시 강남구 테헤란로 123
+
+이번 행사는 삶의 새로운 시작을 원하는 분들을 위해 마련된 특별한 시간입니다. 아름다운 찬양, 은혜로운 말씀, 그리고 따뜻한 사람들이 기다리고 있습니다.
+
+부담 없이 함께해 주시면 정말 감사하겠습니다.
+
+문의: 010-0000-0000 (은혜교회)
+
+주님의 사랑으로,
+${sender} 드림`;
+    },
+
+    getSMSTemplate(name) {
+      const sender = this.senderName || '성도';
+      return `[새생명 축제 초청] ${name}님 안녕하세요, ${sender}입니다 😊
+
+✨새생명 축제 2026✨
+"새 생명, 새 시작"
+
+📅 5/17(일)~22(금) 매일 저녁 7시
+📍 은혜교회 대예배당
+   강남구 테헤란로 123
+
+부담 없이 오세요 💛
+문의: 010-0000-0000`;
+    },
+
+    submitDecision() {
+      if (!this.decisionForm.name.trim() || !this.decisionForm.phone.trim()) {
+        this.addToast('이름과 연락처는 필수입니다.', 'error');
+        return;
+      }
+      const flags = [
+        this.decisionForm.decision ? '구주 영접' : '',
+        this.decisionForm.pray ? '기도응답' : '',
+        this.decisionForm.baptism ? '세례희망' : '',
+        this.decisionForm.cell ? '소그룹참여' : '',
+      ].filter(Boolean).join(', ');
+      this.targets.unshift({
+        id: Date.now().toString(),
+        name: this.decisionForm.name,
+        phone: this.decisionForm.phone,
+        relationship: '결단자',
+        status: '결단',
+        notes: (flags ? `[결단] ${flags}` : '') + (this.decisionForm.notes ? '\n' + this.decisionForm.notes : ''),
+        inviteCount: 0,
+        lastContact: new Date().toISOString().split('T')[0],
+        createdAt: new Date().toISOString().split('T')[0],
+        prayerCount: 0,
+      });
+      this.saveTargets();
+      this.decisionSubmitted = true;
+    },
+
+    addToast(message, type = 'success') {
+      const id = Date.now();
+      this.toasts.push({ id, message, type });
+      setTimeout(() => { this.toasts = this.toasts.filter(t => t.id !== id); }, 3800);
+    },
+  };
+}
+</script>
+</body>
+</html>
