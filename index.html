@@ -104,12 +104,12 @@
         <iconify-icon icon="solar:crown-bold" style="font-size:14px"></iconify-icon>VIP명단 작성
       </span>
       <template x-if="isLoggedIn">
-        <span class="nav-link" :class="currentView==='dashboard'?'on':''" @click="navigate('dashboard')">대시보드</span>
+        <span class="nav-link" :class="currentView==='dashboard'?'on':''" @click="navigate('dashboard')">전도현황</span>
       </template>
       <template x-if="isLoggedIn">
-        <span class="nav-link" :class="currentView==='targets'?'on':''" @click="navigate('targets')">전도관리</span>
+        <span class="nav-link" :class="currentView==='targets'?'on':''" @click="navigate('targets')">전도대상자</span>
       </template>
-      <template x-if="isLoggedIn">
+      <template x-if="isAdmin">
         <span class="nav-link" :class="currentView==='invite'?'on':''" @click="navigate('invite')">초청발송</span>
       </template>
       <template x-if="isAdmin">
@@ -511,9 +511,11 @@
           <button @click="navigate('targets')" class="btn-ghost w-full justify-start btn-sm gap-3">
             <iconify-icon icon="solar:user-plus-bold" style="font-size:16px;color:#f59e0b"></iconify-icon>전도 대상자 관리
           </button>
-          <button @click="navigate('invite')" class="btn-ghost w-full justify-start btn-sm gap-3">
-            <iconify-icon icon="solar:letter-bold" style="font-size:16px;color:#60a5fa"></iconify-icon>초청장 / 문자 발송
-          </button>
+          <template x-if="isAdmin">
+            <button @click="navigate('invite')" class="btn-ghost w-full justify-start btn-sm gap-3">
+              <iconify-icon icon="solar:letter-bold" style="font-size:16px;color:#60a5fa"></iconify-icon>초청장 / 문자 발송
+            </button>
+          </template>
           <button @click="navigate('decision')" class="btn-ghost w-full justify-start btn-sm gap-3">
             <iconify-icon icon="solar:heart-bold" style="font-size:16px;color:#c084fc"></iconify-icon>결단 카드 (공개)
           </button>
@@ -620,9 +622,11 @@
         </div>
         <div class="px-4 py-3 flex items-center justify-between" style="border-top:1px solid rgba(255,255,255,.04)">
           <span class="text-xs text-zinc-600" x-text="filteredTargets.length+'명 표시 (전체 '+targets.length+'명)'"></span>
-          <button @click="navigate('invite')" class="btn-primary btn-sm">
-            <iconify-icon icon="solar:letter-bold" style="font-size:13px;color:#000"></iconify-icon>초청장 발송
-          </button>
+          <template x-if="isAdmin">
+            <button @click="navigate('invite')" class="btn-primary btn-sm">
+              <iconify-icon icon="solar:letter-bold" style="font-size:13px;color:#000"></iconify-icon>초청장 발송
+            </button>
+          </template>
         </div>
       </div>
     </div>
@@ -842,6 +846,24 @@
           한 영혼을 위해 이름을 적고 기도하는 것,<br>
           그것이 가장 강력한 전도의 시작입니다.
         </p>
+
+        <!-- CTA -->
+        <div class="aup d3 text-center space-y-4 mt-8">
+          <div class="flex flex-wrap justify-center gap-3">
+            <button @click="vipAddTarget()" class="btn-primary">
+              <div class="ic"><iconify-icon icon="solar:user-plus-bold" style="font-size:13px;color:#000"></iconify-icon></div>
+              VIP 이름 등록하기
+            </button>
+            <button @click="navigate('landing')" class="btn-ghost">
+              <iconify-icon icon="solar:calendar-bold" style="font-size:15px"></iconify-icon>
+              행사 일정 보기
+            </button>
+          </div>
+          <p class="text-xs text-zinc-600 pt-1">
+            <iconify-icon icon="solar:lock-bold" style="font-size:12px;vertical-align:middle"></iconify-icon>
+            로그인한 성도만 본인의 명단을 볼 수 있습니다
+          </p>
+        </div>
       </div>
     </div>
 
@@ -933,26 +955,6 @@
           </div>
         </div>
       </div>
-    </div>
-
-    <!-- CTA -->
-    <div class="text-center space-y-4">
-      <h2 class="text-2xl md:text-3xl font-bold">지금 바로 VIP 이름을 적어보세요</h2>
-      <p class="text-zinc-500 text-sm">로그인 후 이름을 등록하면 기도·초청·발송까지 한 번에 관리됩니다</p>
-      <div class="flex flex-wrap justify-center gap-3 pt-2">
-        <button @click="vipAddTarget()" class="btn-primary">
-          <div class="ic"><iconify-icon icon="solar:user-plus-bold" style="font-size:13px;color:#000"></iconify-icon></div>
-          VIP 이름 등록하기
-        </button>
-        <button @click="navigate('landing')" class="btn-ghost">
-          <iconify-icon icon="solar:calendar-bold" style="font-size:15px"></iconify-icon>
-          행사 일정 보기
-        </button>
-      </div>
-      <p class="text-xs text-zinc-600 pt-2">
-        <iconify-icon icon="solar:lock-bold" style="font-size:12px;vertical-align:middle"></iconify-icon>
-        로그인한 성도만 본인의 명단을 볼 수 있습니다
-      </p>
     </div>
 
   </div>
@@ -1180,8 +1182,11 @@ function gospel() {
       this.loading = false;
       if (error) { this.loginForm.error = '이메일 또는 비밀번호가 올바르지 않습니다.'; return; }
       this.loginForm = { email:'', password:'', error:'' };
-      this.navigate(this.pendingView || 'dashboard');
+      const dest = this.pendingView || 'targets';
+      this.pendingView = null;
+      this.navigate(dest);
       this.addToast('로그인 되었습니다. 환영합니다! 🎉', 'success');
+      if (dest === 'targets') this.$nextTick(() => this.openAddTarget());
     },
 
     async register() {
@@ -1446,8 +1451,8 @@ ${sender} 드림`;
     },
 
     navigate(view) {
-      const memberViews = ['dashboard', 'targets', 'invite'];
-      const adminViews  = ['admin-members'];
+      const memberViews = ['dashboard', 'targets'];
+      const adminViews  = ['admin-members', 'invite'];
       if ([...memberViews, ...adminViews].includes(view) && !this.isLoggedIn) {
         this.pendingView = view;
         this.currentView = 'login';
