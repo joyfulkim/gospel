@@ -530,6 +530,72 @@
         </div>
       </div></div>
     </div>
+
+    <!-- 관계맺기 체크리스트 -->
+    <div class="bezel aup d4 mt-8" x-data="{
+      checks: [false,false,false,false,false,false,false,false,false,false,false,false,false,false,false,false],
+      items: [
+        { icon:'solar:smartphone-bold',        color:'#60a5fa', text:'SNS(인스타·카카오) 친구 추가하기' },
+        { icon:'solar:hand-shake-bold',         color:'#f59e0b', text:'이름과 연락처 교환 후 첫 인사 나누기' },
+        { icon:'solar:chat-round-dots-bold',    color:'#a78bfa', text:'일상 안부 문자·DM 먼저 보내기' },
+        { icon:'solar:cup-hot-bold',            color:'#fb923c', text:'함께 카페·밥 약속 잡기 (1:1)' },
+        { icon:'solar:star-bold',               color:'#fbbf24', text:'상대의 취미·관심사 파악하고 공감하기' },
+        { icon:'solar:gift-bold',               color:'#f472b6', text:'생일·특별한 날 축하 메시지 보내기' },
+        { icon:'solar:heart-bold',              color:'#f87171', text:'힘든 이야기 판단 없이 끝까지 들어주기' },
+        { icon:'solar:running-round-bold',      color:'#34d399', text:'운동·취미 활동 함께 해보기' },
+        { icon:'mdi:hands-pray',                color:'#c084fc', text:'상대방을 위해 매일 중보기도하기' },
+        { icon:'solar:calendar-mark-bold',      color:'#38bdf8', text:'새생명 축제 일정 자연스럽게 알려주기' },
+        { icon:'solar:link-bold',               color:'#4ade80', text:'행사 관련 SNS 게시물·릴스 공유하기' },
+        { icon:'solar:letter-bold',             color:'#60a5fa', text:'초청장 직접 전달하거나 문자로 보내기' },
+        { icon:'solar:map-point-bold',          color:'#f59e0b', text:'당일 함께 오기로 약속 구체적으로 잡기' },
+        { icon:'solar:smile-circle-bold',       color:'#fb923c', text:'행사 당일 옆에서 함께 예배드리기' },
+        { icon:'solar:chat-line-bold',          color:'#a78bfa', text:'행사 후 소감 나누고 다음 만남 이어가기' },
+        { icon:'solar:hand-heart-bold',         color:'#f472b6', text:'진심 어린 감사 메시지·손 편지 전하기' }
+      ],
+      get done() { return this.checks.filter(Boolean).length }
+    }">
+      <div class="bezel-inner p-5 md:p-7">
+        <div class="flex items-center justify-between mb-5">
+          <div>
+            <p class="text-xs font-semibold text-amber-500 tracking-widest mb-0.5">RELATIONSHIP CHECKLIST</p>
+            <h2 class="text-lg font-bold">전도대상자와 관계맺기 체크리스트</h2>
+          </div>
+          <div class="text-right">
+            <div class="text-2xl font-bold" x-text="done + '/16'"></div>
+            <div class="text-xs text-zinc-500 mt-0.5">완료</div>
+          </div>
+        </div>
+
+        <!-- progress bar -->
+        <div class="w-full bg-zinc-800 rounded-full h-1.5 mb-6">
+          <div class="bg-amber-400 h-1.5 rounded-full transition-all duration-500"
+               :style="`width:${(done/16)*100}%`"></div>
+        </div>
+
+        <div class="grid sm:grid-cols-2 gap-2">
+          <template x-for="(item, i) in items" :key="i">
+            <button
+              @click="checks[i] = !checks[i]; checks = [...checks]"
+              class="flex items-center gap-3 rounded-xl px-3 py-2.5 text-left transition-all duration-200"
+              :class="checks[i] ? 'bg-amber-400/10 border border-amber-400/30' : 'bg-zinc-800/60 border border-transparent hover:border-zinc-700'"
+            >
+              <div class="flex-shrink-0 w-5 h-5 rounded-full border-2 flex items-center justify-center transition-all duration-200"
+                   :class="checks[i] ? 'border-amber-400 bg-amber-400' : 'border-zinc-600'">
+                <iconify-icon x-show="checks[i]" icon="solar:check-read-bold" style="font-size:11px;color:#000"></iconify-icon>
+              </div>
+              <iconify-icon :icon="item.icon" style="font-size:15px;flex-shrink:0" :style="`color:${checks[i]?item.color:'#71717a'}`"></iconify-icon>
+              <span class="text-sm leading-snug transition-colors duration-200"
+                    :class="checks[i] ? 'text-amber-300 line-through decoration-amber-400/50' : 'text-zinc-300'"
+                    x-text="item.text"></span>
+            </button>
+          </template>
+        </div>
+
+        <p class="text-xs text-zinc-600 mt-5 text-center">체크리스트는 이 기기에서만 임시 저장됩니다 · 대상자별로 기록을 남기려면 메모 기능을 활용하세요</p>
+
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -630,6 +696,39 @@
         </div>
       </div>
     </div>
+
+    <!-- 전도 성경구절 -->
+    <div class="bezel aup mt-8" x-data="(() => {
+      const verses = [
+        { ref:'마태복음 28:19-20', text:'그러므로 너희는 가서 모든 민족을 제자로 삼아 아버지와 아들과 성령의 이름으로 세례를 베풀고, 내가 너희에게 분부한 모든 것을 가르쳐 지키게 하라. 볼지어다 내가 세상 끝날까지 너희와 항상 함께 있으리라.' },
+        { ref:'마가복음 16:15', text:'또 이르시되 너희는 온 천하에 다니며 만민에게 복음을 전파하라.' },
+        { ref:'로마서 10:14', text:'그런즉 그들이 믿지 아니하는 이를 어찌 부르리요 듣지도 못한 이를 어찌 믿으리요 전파하는 자가 없이 어찌 들으리요.' },
+        { ref:'누가복음 15:7', text:'내가 너희에게 이르노니 이와 같이 죄인 한 사람이 회개하면 하늘에서는 회개할 것 없는 의인 아흔아홉으로 말미암아 기뻐하는 것보다 더하리라.' },
+        { ref:'요한복음 3:16', text:'하나님이 세상을 이처럼 사랑하사 독생자를 주셨으니 이는 그를 믿는 자마다 멸망하지 않고 영생을 얻게 하려 하심이라.' },
+        { ref:'사도행전 1:8', text:'오직 성령이 너희에게 임하시면 너희가 권능을 받고 예루살렘과 온 유대와 사마리아와 땅 끝까지 이르러 내 증인이 되리라 하시니라.' },
+        { ref:'고린도전서 9:16', text:'내가 복음을 전할지라도 자랑할 것이 없음은 내가 부득불 할 일임이라 만일 복음을 전하지 아니하면 내게 화가 있을 것임이로라.' },
+        { ref:'잠언 11:30', text:'의인의 열매는 생명나무라 지혜로운 자는 사람을 얻느니라.' },
+        { ref:'에스겔 3:18', text:'가령 내가 악인에게 말하기를 너는 반드시 죽으리라 할 때에 네가 깨우치지 아니하거나 말로 악인에게 일러서 그의 악한 길을 떠나 생명을 구원하게 하지 아니하면 그 악인은 자기 죄악으로 말미암아 죽으려니와 내가 그의 피 값을 네 손에서 찾을 것이고.' },
+        { ref:'디모데후서 4:2', text:'너는 말씀을 전파하라 때를 얻든지 못 얻든지 항상 힘쓰라 범사에 오래 참음과 가르침으로 경책하며 경계하며 권하라.' },
+        { ref:'이사야 52:7', text:'좋은 소식을 전하며 평화를 공포하며 복된 좋은 소식을 가져오며 구원을 공포하며 시온을 향하여 이르기를 네 하나님이 통치하신다 하는 자의 산을 넘는 발이 어찌 그리 아름다운가.' },
+        { ref:'베드로전서 3:15', text:'너희 마음에 그리스도를 주로 삼아 거룩하게 하고 너희 속에 있는 소망에 관한 이유를 묻는 자에게는 대답할 것을 항상 준비하되 온유와 두려움으로 하고.' }
+      ];
+      const idx = Math.floor(Math.random() * verses.length);
+      return { verse: verses[idx] };
+    })()">
+      <div class="bezel-inner p-5 md:p-7">
+        <div class="flex items-center gap-2 mb-4">
+          <iconify-icon icon="solar:book-bold" style="font-size:18px;color:#f59e0b"></iconify-icon>
+          <p class="text-xs font-semibold text-amber-500 tracking-widest">오늘의 전도 말씀</p>
+        </div>
+        <blockquote class="border-l-2 border-amber-400/60 pl-4">
+          <p class="text-sm md:text-base text-zinc-200 leading-relaxed italic" x-text="verse.text"></p>
+          <footer class="mt-3 text-xs font-bold text-amber-400" x-text="'— ' + verse.ref"></footer>
+        </blockquote>
+        <p class="text-xs text-zinc-600 mt-4 text-right">새로고침 할 때마다 말씀이 바뀝니다</p>
+      </div>
+    </div>
+
   </div>
 </div>
 
