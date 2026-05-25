@@ -9,12 +9,21 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css">
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="https://code.iconify.design/iconify-icon/2.1.0/iconify-icon.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-firestore-compat.js"></script>
 
-  <!-- ★ Supabase 설정: 프로젝트 생성 후 아래 두 값을 교체하세요 ★ -->
   <script>
-    const SUPABASE_URL      = 'https://ikmrusdihfqjpwcnufmw.supabase.co'
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlrbXJ1c2RpaGZxanB3Y251Zm13Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzYwMTcwMDYsImV4cCI6MjA5MTU5MzAwNn0.x2FX908k83FrbeUnQj_6WAuKZUoTDEndwXgneXOvbrs'
+    const FIREBASE_CONFIG = {
+      apiKey: 'AIzaSyAVA8uEgNirJYAqgMu0K5ZzJsZOxxUSauw',
+      authDomain: 'gospel-10d93.firebaseapp.com',
+      projectId: 'gospel-10d93',
+      storageBucket: 'gospel-10d93.firebasestorage.app',
+      messagingSenderId: '909938638864',
+      appId: '1:909938638864:web:6ae8a68ab6cfab9e8d0a95',
+      measurementId: 'G-PEL5WHMH2E',
+    };
+    const ADMIN_EMAILS = ['kms@jfm.kr'];
   </script>
 
   <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/cdn.min.js"></script>
@@ -337,6 +346,15 @@
         <p class="text-zinc-500 text-sm">전도 관리 시스템에 접속합니다</p>
       </div>
       <div class="space-y-4">
+        <button @click="loginWithGoogle()" :disabled="loading" class="btn-ghost w-full justify-center">
+          <iconify-icon icon="logos:google-icon" style="font-size:18px"></iconify-icon>
+          Google 계정으로 로그인
+        </button>
+        <div class="flex items-center gap-3 text-xs text-zinc-600">
+          <div class="h-px flex-1" style="background:rgba(255,255,255,.08)"></div>
+          이메일로 로그인
+          <div class="h-px flex-1" style="background:rgba(255,255,255,.08)"></div>
+        </div>
         <div>
           <label class="block text-xs font-semibold text-zinc-400 mb-1.5">이메일</label>
           <input x-model="loginForm.email" @keyup.enter="login()" type="email" placeholder="이메일 주소" class="inp">
@@ -653,7 +671,7 @@
                 <template x-for="t in filteredTargets" :key="t.id">
                   <tr class="tbl-row">
                     <td class="font-semibold" x-text="t.name"></td>
-                    <template x-if="isAdmin"><td class="text-zinc-400 text-xs" x-text="t.profiles?.full_name||'—'"></td></template>
+                    <template x-if="isAdmin"><td class="text-zinc-400 text-xs" x-text="t.owner_name||'—'"></td></template>
                     <td class="text-zinc-400 text-xs font-mono" x-text="t.phone"></td>
                     <td class="text-zinc-500 text-xs" x-text="t.relationship"></td>
                     <td><span class="badge" :class="badgeClass(t.status)" x-text="t.status"></span></td>
@@ -903,10 +921,10 @@
                     <template x-if="m.role!=='admin'">
                       <button @click="updateMemberRole(m.id,'admin')" class="btn-ghost btn-sm btn-success px-2.5 py-1.5 text-xs">관리자로</button>
                     </template>
-                    <template x-if="m.role==='admin' && m.id!==user?.id">
+                    <template x-if="m.role==='admin' && m.id!==user?.uid">
                       <button @click="updateMemberRole(m.id,'member')" class="btn-ghost btn-sm btn-danger px-2.5 py-1.5 text-xs">성도로</button>
                     </template>
-                    <template x-if="m.role==='admin' && m.id===user?.id">
+                    <template x-if="m.role==='admin' && m.id===user?.uid">
                       <span class="text-xs text-zinc-600">본인</span>
                     </template>
                   </div>
@@ -1189,14 +1207,15 @@
 <script>
 function gospel() {
   return {
-    sb: null,
+    app: null,
+    auth: null,
+    db: null,
     currentView: 'landing',
     loading: false,
-    session: null,
     user: null,
     profile: null,
 
-    get isLoggedIn() { return !!this.session; },
+    get isLoggedIn() { return !!this.user; },
     get isAdmin()    { return this.profile?.role === 'admin'; },
 
     countdown: { days:0, hours:0, minutes:0, seconds:0 },
@@ -1238,14 +1257,12 @@ function gospel() {
 
     // ── INIT ────────────────────────────────────────────────────
     async init() {
-      this.sb = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+      this.app = firebase.initializeApp(FIREBASE_CONFIG);
+      this.auth = firebase.auth();
+      this.db = firebase.firestore();
 
-      const { data: { session } } = await this.sb.auth.getSession();
-      if (session) await this._onSession(session);
-
-      this.sb.auth.onAuthStateChange(async (_event, session) => {
-        this.session = session;
-        if (session) await this._onSession(session);
+      this.auth.onAuthStateChanged(async (user) => {
+        if (user) await this._onUser(user);
         else this._clearState();
       });
 
@@ -1253,31 +1270,54 @@ function gospel() {
       setInterval(() => this.updateCountdown(), 1000);
     },
 
-    async _onSession(session) {
-      this.session = session;
-      this.user    = session.user;
+    async _onUser(user) {
+      this.user = user;
       await this.loadProfile();
       await this.loadTargets();
       if (this.isAdmin) await this.loadMembers();
     },
 
     _clearState() {
-      this.session=null; this.user=null; this.profile=null;
+      this.user=null; this.profile=null;
       this.targets=[]; this.members=[]; this.decisions=[];
     },
 
     // ── AUTH ────────────────────────────────────────────────────
+    async loginWithGoogle() {
+      this.loading = true;
+      this.loginForm.error = '';
+      try {
+        const provider = new firebase.auth.GoogleAuthProvider();
+        provider.setCustomParameters({ prompt: 'select_account' });
+        const result = await this.auth.signInWithPopup(provider);
+        await this._onUser(result.user);
+        this._afterLogin();
+      } catch (error) {
+        this.loginForm.error = this.authErrorMessage(error);
+      } finally {
+        this.loading = false;
+      }
+    },
+
     async login() {
       if (!this.loginForm.email || !this.loginForm.password) {
         this.loginForm.error = '이메일과 비밀번호를 입력해주세요.'; return;
       }
       this.loading = true;
-      const { error } = await this.sb.auth.signInWithPassword({
-        email: this.loginForm.email, password: this.loginForm.password,
-      });
-      this.loading = false;
-      if (error) { this.loginForm.error = '이메일 또는 비밀번호가 올바르지 않습니다.'; return; }
-      this.loginForm = { email:'', password:'', error:'' };
+      this.loginForm.error = '';
+      try {
+        const result = await this.auth.signInWithEmailAndPassword(this.loginForm.email, this.loginForm.password);
+        await this._onUser(result.user);
+        this.loginForm = { email:'', password:'', error:'' };
+        this._afterLogin();
+      } catch (error) {
+        this.loginForm.error = this.authErrorMessage(error);
+      } finally {
+        this.loading = false;
+      }
+    },
+
+    _afterLogin() {
       const dest = this.pendingView || 'targets';
       this.pendingView = null;
       this.navigate(dest);
@@ -1293,48 +1333,93 @@ function gospel() {
         this.registerForm.error = '비밀번호는 6자 이상이어야 합니다.'; return;
       }
       this.loading = true;
-      const { error } = await this.sb.auth.signUp({
-        email: this.registerForm.email,
-        password: this.registerForm.password,
-        options: { data: { full_name: this.registerForm.full_name } },
-      });
-      this.loading = false;
-      if (error) { this.registerForm.error = error.message; return; }
-
-      // Update cell_group if provided
-      if (this.registerForm.cell_group) {
-        setTimeout(async () => {
-          const { data: { user } } = await this.sb.auth.getUser();
-          if (user) await this.sb.from('profiles').update({ cell_group: this.registerForm.cell_group }).eq('id', user.id);
-        }, 2000);
+      this.registerForm.error = '';
+      try {
+        const result = await this.auth.createUserWithEmailAndPassword(this.registerForm.email, this.registerForm.password);
+        await result.user.updateProfile({ displayName: this.registerForm.full_name });
+        await this.ensureProfile(result.user, {
+          full_name: this.registerForm.full_name,
+          cell_group: this.registerForm.cell_group,
+        });
+        await this._onUser(result.user);
+        this.registerForm = { full_name:'', cell_group:'', email:'', password:'', error:'' };
+        this.addToast('회원가입 완료! 바로 전도 관리를 시작할 수 있습니다.', 'success');
+        this.navigate(this.pendingView || 'targets');
+        this.pendingView = null;
+      } catch (error) {
+        this.registerForm.error = this.authErrorMessage(error);
+      } finally {
+        this.loading = false;
       }
-
-      this.registerForm = { full_name:'', cell_group:'', email:'', password:'', error:'' };
-      this.addToast('회원가입 완료! 이메일 인증 후 로그인하세요.', 'success');
-      this.navigate('login');
     },
 
     async logout() {
-      await this.sb.auth.signOut();
+      await this.auth.signOut();
       this.navigate('landing');
       this.addToast('로그아웃 되었습니다.', 'success');
     },
 
+    authErrorMessage(error) {
+      if (error?.code === 'auth/popup-closed-by-user') return '로그인 창이 닫혔습니다.';
+      if (error?.code === 'auth/operation-not-allowed') return 'Firebase 콘솔에서 Google 또는 이메일 로그인을 활성화해야 합니다.';
+      if (error?.code === 'auth/email-already-in-use') return '이미 가입된 이메일입니다.';
+      if (error?.code === 'auth/invalid-credential' || error?.code === 'auth/wrong-password') return '이메일 또는 비밀번호가 올바르지 않습니다.';
+      if (error?.code === 'auth/user-not-found') return '등록되지 않은 이메일입니다.';
+      return error?.message || '인증 중 오류가 발생했습니다.';
+    },
+
     // ── PROFILE ─────────────────────────────────────────────────
     async loadProfile() {
-      const { data } = await this.sb.from('profiles').select('*').eq('id', this.user.id).single();
-      this.profile = data;
-      if (data?.full_name) this.senderName = data.full_name;
+      this.profile = await this.ensureProfile(this.user);
+      if (this.profile?.full_name) this.senderName = this.profile.full_name;
+    },
+
+    async ensureProfile(user, extra = {}) {
+      const ref = this.db.collection('profiles').doc(user.uid);
+      const snap = await ref.get();
+      const email = user.email || '';
+      const isAdminEmail = ADMIN_EMAILS.includes(email);
+      const base = {
+        id: user.uid,
+        email,
+        full_name: extra.full_name || user.displayName || email.split('@')[0] || '성도',
+        cell_group: extra.cell_group || '',
+        role: isAdminEmail ? 'admin' : 'member',
+        provider: user.providerData?.[0]?.providerId || 'password',
+      };
+
+      if (!snap.exists) {
+        const profile = { ...base, created_at: new Date().toISOString(), updated_at: new Date().toISOString() };
+        await ref.set(profile);
+        return profile;
+      }
+
+      const current = snap.data();
+      const updates = {
+        email,
+        full_name: extra.full_name || current.full_name || base.full_name,
+        cell_group: extra.cell_group || current.cell_group || '',
+        updated_at: new Date().toISOString(),
+      };
+      if (isAdminEmail && current.role !== 'admin') updates.role = 'admin';
+      await ref.set(updates, { merge: true });
+      return { id: user.uid, ...current, ...updates, role: updates.role || current.role || base.role };
     },
 
     // ── TARGETS ─────────────────────────────────────────────────
     async loadTargets() {
       this.loading = true;
-      const { data, error } = await this.sb.from('targets')
-        .select(this.isAdmin ? '*, profiles(full_name, cell_group)' : '*')
-        .order('created_at', { ascending: false });
-      this.loading = false;
-      if (!error) this.targets = data || [];
+      try {
+        let query = this.db.collection('targets');
+        if (!this.isAdmin) query = query.where('owner_id', '==', this.user.uid);
+        const snap = await query.get();
+        this.targets = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+          .sort((a, b) => (b.created_at || '').localeCompare(a.created_at || ''));
+      } catch (error) {
+        this.addToast('VIP 명단을 불러오지 못했습니다: ' + error.message, 'error');
+      } finally {
+        this.loading = false;
+      }
     },
 
     openAddTarget() {
@@ -1354,38 +1439,60 @@ function gospel() {
         this.addToast('이름과 연락처를 입력해주세요.', 'error'); return;
       }
       this.loading = true;
-      if (this.editingTarget) {
-        const { error } = await this.sb.from('targets')
-          .update({ ...this.targetForm, updated_at: new Date().toISOString() })
-          .eq('id', this.editingTarget.id);
-        if (error) { this.addToast('수정 실패: ' + error.message, 'error'); this.loading=false; return; }
-        this.addToast('수정되었습니다.', 'success');
-      } else {
-        const { error } = await this.sb.from('targets')
-          .insert({ ...this.targetForm, owner_id: this.user.id });
-        if (error) { this.addToast('추가 실패: ' + error.message, 'error'); this.loading=false; return; }
-        this.addToast('새 전도 대상자가 추가되었습니다! 🙏', 'success');
+      try {
+        const payload = {
+          ...this.targetForm,
+          updated_at: new Date().toISOString(),
+        };
+        if (this.editingTarget) {
+          await this.db.collection('targets').doc(this.editingTarget.id).set(payload, { merge: true });
+          this.addToast('수정되었습니다.', 'success');
+        } else {
+          await this.db.collection('targets').add({
+            ...payload,
+            owner_id: this.user.uid,
+            owner_name: this.profile?.full_name || this.user.displayName || this.user.email || '성도',
+            owner_email: this.user.email || '',
+            owner_cell_group: this.profile?.cell_group || '',
+            invite_count: 0,
+            prayer_count: 0,
+            created_at: new Date().toISOString(),
+          });
+          this.addToast('새 VIP 명단이 추가되었습니다! 🙏', 'success');
+        }
+        await this.loadTargets();
+        if (this.isAdmin) await this.loadMembers();
+        this.showTargetModal = false;
+      } catch (error) {
+        this.addToast((this.editingTarget ? '수정 실패: ' : '추가 실패: ') + error.message, 'error');
+      } finally {
+        this.loading = false;
       }
-      await this.loadTargets();
-      this.loading = false;
-      this.showTargetModal = false;
     },
 
     async deleteTarget(id) {
       if (!confirm('정말 삭제하시겠습니까?')) return;
-      const { error } = await this.sb.from('targets').delete().eq('id', id);
-      if (!error) {
+      try {
+        await this.db.collection('targets').doc(id).delete();
         this.targets = this.targets.filter(t => t.id !== id);
         this.selectedTargets = this.selectedTargets.filter(sid => sid !== id);
         this.addToast('삭제되었습니다.', 'success');
+        if (this.isAdmin) await this.loadMembers();
+      } catch (error) {
+        this.addToast('삭제 실패: ' + error.message, 'error');
       }
     },
 
     async incrementPrayer(id) {
-      const { error } = await this.sb.rpc('increment_prayer', { target_id: id });
-      if (!error) {
+      try {
+        await this.db.collection('targets').doc(id).update({
+          prayer_count: firebase.firestore.FieldValue.increment(1),
+          updated_at: new Date().toISOString(),
+        });
         const t = this.targets.find(t => t.id === id);
         if (t) t.prayer_count = (t.prayer_count || 0) + 1;
+      } catch (error) {
+        this.addToast('기도 횟수 저장 실패: ' + error.message, 'error');
       }
     },
 
@@ -1433,15 +1540,26 @@ function gospel() {
     async sendInvite() {
       if (!this.selectedTargets.length) { this.addToast('받는 분을 선택해주세요.', 'error'); return; }
       this.loading = true;
-      for (const id of this.selectedTargets) {
-        await this.sb.rpc('increment_invite', { target_id: id });
+      try {
+        const batch = this.db.batch();
+        for (const id of this.selectedTargets) {
+          batch.update(this.db.collection('targets').doc(id), {
+            invite_count: firebase.firestore.FieldValue.increment(1),
+            status: '초청함',
+            updated_at: new Date().toISOString(),
+          });
+        }
+        await batch.commit();
+        await this.loadTargets();
+        this.sentCount = this.selectedTargets.length;
+        this.inviteSent = true;
+        this.addToast(this.sentCount + '명에게 발송되었습니다! ✉️', 'success');
+        setTimeout(() => { this.inviteSent = false; this.selectedTargets = []; }, 5000);
+      } catch (error) {
+        this.addToast('발송 기록 저장 실패: ' + error.message, 'error');
+      } finally {
+        this.loading = false;
       }
-      await this.loadTargets();
-      this.loading = false;
-      this.sentCount = this.selectedTargets.length;
-      this.inviteSent = true;
-      this.addToast(this.sentCount + '명에게 발송되었습니다! ✉️', 'success');
-      setTimeout(() => { this.inviteSent = false; this.selectedTargets = []; }, 5000);
     },
 
     getLetterTemplate(name) {
@@ -1487,51 +1605,69 @@ ${sender} 드림`;
         this.addToast('이름과 연락처는 필수입니다.', 'error'); return;
       }
       this.loading = true;
-      const { error } = await this.sb.from('decisions').insert({
-        name:         this.decisionForm.name,
-        phone:        this.decisionForm.phone,
-        email:        this.decisionForm.email,
-        want_accept:  this.decisionForm.decision,
-        want_pray:    this.decisionForm.pray,
-        want_baptism: this.decisionForm.baptism,
-        want_cell:    this.decisionForm.cell,
-        notes:        this.decisionForm.notes,
-      });
-      this.loading = false;
-      if (error) { this.addToast('제출 실패: ' + error.message, 'error'); return; }
-      this.decisionSubmitted = true;
+      try {
+        await this.db.collection('decisions').add({
+          name:         this.decisionForm.name,
+          phone:        this.decisionForm.phone,
+          email:        this.decisionForm.email,
+          want_accept:  this.decisionForm.decision,
+          want_pray:    this.decisionForm.pray,
+          want_baptism: this.decisionForm.baptism,
+          want_cell:    this.decisionForm.cell,
+          notes:        this.decisionForm.notes,
+          created_at:   new Date().toISOString(),
+        });
+        this.decisionSubmitted = true;
+      } catch (error) {
+        this.addToast('제출 실패: ' + error.message, 'error');
+      } finally {
+        this.loading = false;
+      }
     },
 
     async loadDecisions() {
-      const { data } = await this.sb.from('decisions').select('*').order('created_at', { ascending: false });
-      this.decisions = data || [];
+      if (!this.isAdmin) return;
+      const snap = await this.db.collection('decisions').get();
+      this.decisions = snap.docs.map(doc => ({ id: doc.id, ...doc.data() }))
+        .sort((a, b) => (b.created_at || '').localeCompare(a.created_at || ''));
     },
 
     // ── ADMIN ────────────────────────────────────────────────────
     async loadMembers() {
-      const { data: profiles } = await this.sb.from('profiles').select('*').order('full_name');
-      if (!profiles) return;
-
-      // Get target counts per member
-      const { data: targetCounts } = await this.sb.from('targets')
-        .select('owner_id');
-
+      if (!this.isAdmin) return;
+      const [profileSnap, targetSnap] = await Promise.all([
+        this.db.collection('profiles').get(),
+        this.db.collection('targets').get(),
+      ]);
       const countMap = {};
-      (targetCounts || []).forEach(t => { countMap[t.owner_id] = (countMap[t.owner_id] || 0) + 1; });
-
-      // Get emails from auth (admin only - we use the user object we already have)
-      this.members = profiles.map(p => ({
-        ...p,
-        target_count: countMap[p.id] || 0,
-        email: p.id === this.user?.id ? this.user.email : '—',
-      }));
+      const targetsByOwner = {};
+      targetSnap.docs.forEach(doc => {
+        const t = { id: doc.id, ...doc.data() };
+        countMap[t.owner_id] = (countMap[t.owner_id] || 0) + 1;
+        if (!targetsByOwner[t.owner_id]) targetsByOwner[t.owner_id] = [];
+        targetsByOwner[t.owner_id].push(t);
+      });
+      this.members = profileSnap.docs.map(doc => {
+        const p = { id: doc.id, ...doc.data() };
+        return {
+          ...p,
+          target_count: countMap[p.id] || 0,
+          targets: targetsByOwner[p.id] || [],
+        };
+      }).sort((a, b) => (a.full_name || '').localeCompare(b.full_name || ''));
     },
 
     async updateMemberRole(memberId, newRole) {
-      const { error } = await this.sb.from('profiles').update({ role: newRole }).eq('id', memberId);
-      if (error) { this.addToast('역할 변경 실패', 'error'); return; }
-      await this.loadMembers();
-      this.addToast('역할이 변경되었습니다.', 'success');
+      try {
+        await this.db.collection('profiles').doc(memberId).set({
+          role: newRole,
+          updated_at: new Date().toISOString(),
+        }, { merge: true });
+        await this.loadMembers();
+        this.addToast('역할이 변경되었습니다.', 'success');
+      } catch (error) {
+        this.addToast('역할 변경 실패: ' + error.message, 'error');
+      }
     },
 
     // ── NAVIGATION ───────────────────────────────────────────────

@@ -1,0 +1,52 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function isAdminEmail() {
+      return signedIn() && request.auth.token.email in ['kms@jfm.kr'];
+    }
+
+    function isAdmin() {
+      return signedIn() && (
+        isAdminEmail() ||
+        get(/databases/$(database)/documents/profiles/$(request.auth.uid)).data.role == 'admin'
+      );
+    }
+
+    match /profiles/{userId} {
+      allow create: if signedIn()
+        && request.auth.uid == userId
+        && (
+          (isAdminEmail() && request.resource.data.role == 'admin') ||
+          (!isAdminEmail() && request.resource.data.role == 'member')
+        );
+
+      allow read: if signedIn() && (request.auth.uid == userId || isAdmin());
+
+      allow update: if signedIn() && (
+        isAdmin() ||
+        (
+          request.auth.uid == userId &&
+          !request.resource.data.diff(resource.data).affectedKeys().hasAny(['role', 'email'])
+        )
+      );
+    }
+
+    match /targets/{targetId} {
+      allow create: if signedIn() && request.resource.data.owner_id == request.auth.uid;
+      allow read, update, delete: if signedIn() && (
+        resource.data.owner_id == request.auth.uid ||
+        isAdmin()
+      );
+    }
+
+    match /decisions/{decisionId} {
+      allow create: if true;
+      allow read, update, delete: if isAdmin();
+    }
+  }
+}
