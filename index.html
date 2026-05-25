@@ -64,6 +64,8 @@
     .btn-danger { background:rgba(239,68,68,.1) !important; border-color:rgba(239,68,68,.25) !important; color:#fca5a5 !important; }
     .btn-danger:hover { background:rgba(239,68,68,.18) !important; }
     .btn-success { background:rgba(34,197,94,.1) !important; border-color:rgba(34,197,94,.25) !important; color:#86efac !important; }
+    .language-select { height:28px; padding:0 28px 0 10px; border-radius:9999px; border:1px solid rgba(245,158,11,.22); background:rgba(255,255,255,.05); color:#fef3c7; font-size:.72rem; font-weight:700; outline:none; cursor:pointer; appearance:none; -webkit-appearance:none; background-image:linear-gradient(45deg,transparent 50%,#fbbf24 50%),linear-gradient(135deg,#fbbf24 50%,transparent 50%); background-position:calc(100% - 14px) 11px,calc(100% - 9px) 11px; background-size:5px 5px,5px 5px; background-repeat:no-repeat; }
+    .language-select option { background:#111; color:#f5f5f5; }
 
     .inp { width:100%; padding:10px 14px; background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1); border-radius:10px; color:#f5f5f5; font-size:.88rem; transition:.2s; appearance:none; -webkit-appearance:none; }
     .inp:focus { outline:none; border-color:rgba(245,158,11,.5); background:rgba(245,158,11,.03); }
@@ -145,6 +147,12 @@
     </div>
 
     <div class="flex items-center gap-2">
+      <select id="languageSelect" class="language-select" aria-label="다국어 선택" title="다국어 선택">
+        <option value="ko">다국어</option>
+        <option value="en">English</option>
+        <option value="ja">日本語</option>
+        <option value="zh">中文</option>
+      </select>
       <template x-if="!isLoggedIn">
         <div class="flex gap-2">
           <button @click="navigate('register')" class="btn-ghost" style="padding:5px 11px;font-size:.68rem;gap:4px">회원가입</button>
@@ -1740,6 +1748,645 @@ ${sender} 드림`;
     },
   };
 }
+</script>
+<script>
+(() => {
+  const i18n = {
+    en: {
+      "GOSPEL 축제 2026 | 꿈을심는교회": "GOSPEL Festival 2026 | Dream Planting Church",
+      "꿈을심는교회": "Dream Planting Church",
+      "꿈을심는교회 로고": "Dream Planting Church logo",
+      "다국어 선택": "Language",
+      "행사안내": "Festival Info",
+      "VIP명단 작성": "VIP List",
+      "VIP 명단작성": "VIP List",
+      "결신카드 작성": "Decision Card",
+      "전도현황": "Outreach Status",
+      "전도대상자": "Outreach Contacts",
+      "초청발송": "Send Invitations",
+      "관리자": "Admin",
+      "성도현황": "Members",
+      "회원가입": "Sign Up",
+      "로그인": "Log In",
+      "로그아웃": "Log Out",
+      "꿈을심는교회 교회창립 19주년 기념": "Celebrating the 19th anniversary of Dream Planting Church",
+      "GOSPEL 축제": "GOSPEL Festival",
+      "2026년 9월 6일(주일) 오전 11시": "Sunday, September 6, 2026 at 11:00 AM",
+      "\"복음의 기쁨, 삶을 새롭게 하는 은혜\" — 함께 예배하며": "\"The joy of the gospel, grace that renews life\" — worship together and",
+      "사랑을 나눕니다": "share love",
+      "일": "Days",
+      "시간": "Hours",
+      "분": "Min",
+      "초": "Sec",
+      "GOSPEL 축제까지 남은 시간": "Time left until the GOSPEL Festival",
+      "행사 일정 보기": "View Schedule",
+      "WHY THIS FESTIVAL": "WHY THIS FESTIVAL",
+      "이번 축제에서 만날 특별한 것들": "What you will experience at this festival",
+      "생명의 말씀": "Life-giving Message",
+      "삶의 무게에 지쳐있는 당신에게 전하는 특별한 메시지. 김명순 담임목사님의 복음 중심 말씀으로 마음의 참된 안식을 경험하세요.": "A special message for those carrying the weight of life. Experience true rest through Pastor Myungsoon Kim's gospel-centered message.",
+      "김명순 목사(꿈을심는교회 담임) · 축제강사": "Pastor Myungsoon Kim (Senior Pastor, Dream Planting Church) · Festival Speaker",
+      "찬양 & 경배": "Praise & Worship",
+      "감동적인 워십팀의 라이브 찬양으로 하나님 앞에 나아가세요.": "Come before God through moving live worship.",
+      "삶의 변화 간증": "Life-change Testimonies",
+      "복음으로 삶이 새로워진 성도들의 진솔한 이야기.": "Honest stories from believers whose lives were renewed by the gospel.",
+      "1:1 개인 상담 & 기도": "1:1 Personal Counseling & Prayer",
+      "훈련된 상담 사역자들과 함께하는 개인 기도 및 상담 시간.": "A time of personal prayer and counseling with trained ministry leaders.",
+      "GOSPEL 축제 당일 일정": "GOSPEL Festival Schedule",
+      "꿈을심는교회 교회창립 19주년 기념 · 2026년 9월 6일(주일) 오전 11시": "Dream Planting Church 19th Anniversary · Sunday, September 6, 2026 at 11:00 AM",
+      "9월 6일": "Sep 6",
+      "주일": "Sunday",
+      "오전 11시": "11:00 AM",
+      "GOSPEL 축제 예배": "GOSPEL Festival Worship",
+      "꿈을심는교회 교회창립 19주년을 기념하며 복음의 기쁨과 감사의 은혜를 함께 나누는 예배입니다.": "A worship service celebrating the church's 19th anniversary and sharing the joy of the gospel with gratitude.",
+      "축제만찬": "Festival Banquet",
+      "GOSPEL 축제 예배 후 함께 식탁의 교제를 나누는 만찬 시간입니다.": "A banquet and fellowship meal after the GOSPEL Festival worship service.",
+      "각 가정별로 음식을 하나씩 정성껏 준비해 와서 자유롭고, 풍성하게 애찬을 나눕니다.": "Each household is invited to lovingly prepare one dish so we can freely share a rich fellowship meal.",
+      "19주년 기념 찬양 콘서트": "19th Anniversary Praise Concert",
+      "교회창립 19주년의 감사와 기쁨을 찬양으로 함께 나누는 콘서트입니다.": "A concert to share gratitude and joy for the church's 19th anniversary through praise.",
+      "특별게스트: 안00, 이00 (CCM 가수)": "Special guests: Ahn 00, Lee 00 (CCM artists)",
+      "오시는 길": "Location",
+      "주소": "Address",
+      "서울시 새말로 8길 26, 2층 교회": "2F, 26 Saemal-ro 8-gil, Seoul",
+      "대중교통": "Public Transit",
+      "지하철 8호선 장지역 1번 출구, 도보 5분": "5-minute walk from Jangji Station, Line 8, Exit 1",
+      "문의": "Contact",
+      "교회 사무실: 02) 2043-0191": "Church Office: 02) 2043-0191",
+      "꿈을심는교회 담임목사 김명순": "Senior Pastor Myungsoon Kim, Dream Planting Church",
+      "당신의 소중한 사람을": "Invite someone precious",
+      "초청해 주세요": "to you",
+      "복음의 씨앗이 자라날 수 있도록,": "So the seed of the gospel can grow,",
+      "당신의 기도와 초청이 누군가의 인생을 바꿀 수 있습니다.": "your prayer and invitation can change someone's life.",
+      "서울시 새말로 8길 26, 2층 교회 · 02) 2043-0191": "2F, 26 Saemal-ro 8-gil, Seoul · 02) 2043-0191",
+      "성도 로그인": "Member Login",
+      "전도 관리 시스템에 접속합니다": "Access the outreach management system",
+      "Google 계정으로 로그인": "Sign in with Google",
+      "이메일로 로그인": "Sign in with email",
+      "이메일": "Email",
+      "비밀번호": "Password",
+      "로그인 중...": "Signing in...",
+      "계정이 없으신가요?": "Don't have an account?",
+      "행사 안내로 돌아가기": "Back to Festival Info",
+      "성도 회원가입": "Member Sign Up",
+      "전도 대상자 관리를 시작하세요": "Start managing outreach contacts",
+      "이름 *": "Name *",
+      "소그룹 / 구역명": "Small Group / District",
+      "이메일 *": "Email *",
+      "비밀번호 *": "Password *",
+      "가입 중...": "Signing up...",
+      "이미 계정이 있으신가요?": "Already have an account?",
+      "전체": "All",
+      "초청": "Invited",
+      "초청한 분들": "Invited contacts",
+      "확인": "Confirmed",
+      "참석 확인": "Attendance confirmed",
+      "결신": "Decision",
+      "결신자": "Decisions",
+      "성도별 전도 현황": "Outreach by Member",
+      "전체 보기": "View All",
+      "가입한 성도가 없습니다": "No members have signed up yet",
+      "전도 진행 현황": "Outreach Progress",
+      "총 기도 횟수:": "Total prayers:",
+      "빠른 실행": "Quick Actions",
+      "전도 대상자 관리": "Manage Contacts",
+      "초청장 / 문자 발송": "Send Invitation / Text",
+      "성도 현황 관리": "Manage Members",
+      "새 대상자 추가": "Add Contact",
+      "전도대상자와 관계맺기 체크리스트": "Relationship-building Checklist",
+      "완료": "Done",
+      "체크리스트는 이 기기에서만 임시 저장됩니다 · 대상자별로 기록을 남기려면 메모 기능을 활용하세요": "This checklist is temporarily saved only on this device. Use notes to keep records for each contact.",
+      "전체 상태": "All Statuses",
+      "초청전": "Not Invited",
+      "초청함": "Invited",
+      "응답대기": "Awaiting Response",
+      "참석확인": "Confirmed",
+      "이름": "Name",
+      "성도": "Member",
+      "연락처": "Phone",
+      "관계": "Relationship",
+      "상태": "Status",
+      "기도": "Prayer",
+      "메모": "Notes",
+      "관리": "Manage",
+      "불러오는 중...": "Loading...",
+      "해당 조건의 대상자가 없습니다": "No contacts match these filters",
+      "초청장 발송": "Send Invitation",
+      "오늘의 전도 말씀": "Today's Outreach Scripture",
+      "새로고침 할 때마다 말씀이 바뀝니다": "The verse changes each time you refresh",
+      "초청장 & 문자 발송": "Send Invitations & Texts",
+      "발송 완료!": "Sent!",
+      "발송 형식": "Send Format",
+      "이메일 초청장": "Email Invitation",
+      "정성스러운 초청 편지": "A thoughtful invitation letter",
+      "문자 메시지": "Text Message",
+      "간결한 SMS 초청": "A concise SMS invitation",
+      "발신자 이름": "Sender Name",
+      "받는 분 선택": "Choose Recipients",
+      "초기화": "Reset",
+      "전도 대상자를 먼저 추가해주세요": "Please add outreach contacts first",
+      "미리보기": "Preview",
+      "각 수신자의 이름으로 개별 발송됩니다": "Each message is personalized with the recipient's name",
+      "전체 성도 목록과 전도 현황을 관리합니다": "Manage the member list and outreach status",
+      "새로고침": "Refresh",
+      "결신카드 제출 현황": "Decision Card Submissions",
+      "불러오기": "Load",
+      "결신카드 불러오기 버튼을 눌러주세요": "Press Load to view decision cards",
+      "결신 내용": "Decision Details",
+      "제출일": "Submitted",
+      "영접": "Accepted Christ",
+      "기도응답": "Prayer Answered",
+      "세례희망": "Wants Baptism",
+      "소그룹": "Small Group",
+      "성도 이름": "Member Name",
+      "소그룹/구역": "Small Group / District",
+      "전도 대상자": "Contacts",
+      "역할": "Role",
+      "역할 변경": "Change Role",
+      "관리자로": "Make Admin",
+      "성도로": "Make Member",
+      "본인": "You",
+      "GOSPEL 축제 2026 · VIP 초청 명단": "GOSPEL Festival 2026 · VIP Invitation List",
+      "당신의": "Who is your",
+      "는": "",
+      "누구인가요?": "VIP?",
+      "한 영혼을 위해 이름을 적고 기도하는 것,": "Writing down a name and praying for one soul,",
+      "그것이 가장 강력한 전도의 시작입니다.": "that is the most powerful beginning of outreach.",
+      "VIP 이름 등록하기": "Add VIP Name",
+      "로그인한 성도만 본인의 명단을 볼 수 있습니다": "Only logged-in members can view their own list",
+      "\"너희는 가서 모든 민족을 제자로 삼아...\"": "\"Go and make disciples of all nations...\"",
+      "마태복음 28:19 — 예수님의 마지막 명령": "Matthew 28:19 — Jesus' Great Commission",
+      "5명": "5 people",
+      "지금 떠오르는 이름": "Names that come to mind",
+      "가족, 친구, 동료 중 복음이 필요한 다섯 명의 이름을 적어보세요. 이름을 적는 순간, 기도가 시작됩니다.": "Write down five family members, friends, or colleagues who need the gospel. The moment you write a name, prayer begins.",
+      "개인 초청의 힘": "The power of personal invitation",
+      "교회를 처음 나온 사람 중 89%는 가족이나 친구의 개인적인 초청으로 왔습니다. 당신의 한마디가 결정적입니다.": "89% of first-time church guests came through a personal invitation from family or friends. Your words matter.",
+      "이름을 부르는 기도": "Prayer by name",
+      "이름이 적힌 사람을 위해 매일 기도할 때, 하나님이 역사하십니다. VIP 명단은 당신의 기도 제목입니다.": "When you pray daily for the person whose name is written, God works. The VIP list is your prayer list.",
+      "VIP 명단 작성이란?": "What is a VIP List?",
+      "GOSPEL 축제를 앞두고, 내 주변에서": "Before the GOSPEL Festival, it means writing down the names of people around you",
+      "꼭 복음을 들어야 할 사람": "who truly need to hear the gospel",
+      "의 이름을 적는 것입니다. 유명인(VIP)처럼 귀하게 여기며 기도하고 초청하는 것이죠.": ". We treat them as precious VIPs, pray for them, and invite them.",
+      "1단계": "Step 1",
+      "이름 적기": "Write the name",
+      "2단계": "Step 2",
+      "매일 기도하기": "Pray daily",
+      "3단계": "Step 3",
+      "마음 담아 초청하기": "Invite with care",
+      "명단을 시스템에 등록하면": "When you register the list in the system,",
+      "초청장과 문자를 손쉽게 발송": "you can easily send invitations and texts",
+      "하고, 기도 횟수도 기록할 수 있습니다.": "and record prayer counts.",
+      "\"처음엔 그냥 친구 이름 하나 적었을 뿐인데, 6개월 기도 끝에 그 친구가 GOSPEL 축제에서 예수님을 영접했습니다. 이름을 적는 것이 그토록 강력한 기도가 될 줄 몰랐어요.\"": "\"At first I only wrote down one friend's name. After six months of prayer, that friend accepted Jesus at the GOSPEL Festival. I didn't know writing a name could become such powerful prayer.\"",
+      "김○○ 성도": "Member Kim",
+      "2024년 GOSPEL 축제 참가자": "2024 GOSPEL Festival Participant",
+      "결신을 환영합니다!": "We welcome your decision!",
+      "소중한 결신을 해주셔서 감사합니다.": "Thank you for making this precious decision.",
+      "담당 사역자가 곧 연락드릴 것입니다.": "A ministry leader will contact you soon.",
+      "새로운 결신카드 작성": "Write Another Decision Card",
+      "복음 안에서 새로운 결신을 하신 분들을 위한 카드입니다.": "A card for those making a new decision in the gospel.",
+      "복음의 핵심": "The Heart of the Gospel",
+      "하나님이 세상을 이처럼 사랑하사": "For God so loved the world",
+      "독생자를 주셨으니, 이는 저를 믿는 자마다 멸망치 않고 영생을 얻게 하려 하심이라.": "that He gave His one and only Son, that whoever believes in Him shall not perish but have eternal life.",
+      "(요한복음 3:16)": "(John 3:16)",
+      "예수 그리스도께서 우리의 죄 값을 대신 치르시고 부활하셨습니다. 오늘 그분을 구주로 영접하시겠습니까?": "Jesus Christ paid the price for our sins and rose again. Will you receive Him as Savior today?",
+      "결신 정보 입력": "Decision Information",
+      "연락처 *": "Phone *",
+      "결신 사항": "Decision Items",
+      "예수님을 구주로 영접합니다": "I receive Jesus as my Savior",
+      "오늘 처음으로 예수님을 나의 구주로 믿기로 결신합니다": "Today I decide to believe in Jesus as my Savior for the first time",
+      "기도 응답을 경험했습니다": "I experienced an answer to prayer",
+      "세례를 받고 싶습니다": "I would like to be baptized",
+      "소그룹(셀)에 참여하겠습니다": "I would like to join a small group",
+      "기도 제목 / 전하고 싶은 말": "Prayer Request / Message",
+      "결신카드 제출하기": "Submit Decision Card",
+      "입력하신 정보는 교회 사역에만 사용됩니다": "Your information will only be used for church ministry",
+      "가족": "Family",
+      "친구": "Friend",
+      "직장동료": "Coworker",
+      "이웃": "Neighbor",
+      "학교동료": "Schoolmate",
+      "기타": "Other",
+      "취소": "Cancel",
+      "수정 완료": "Save Changes",
+      "추가하기": "Add",
+      "저장": "Save",
+      "삭제되었습니다.": "Deleted.",
+      "역할이 변경되었습니다.": "Role changed.",
+      "로그인 후 VIP 명단을 등록할 수 있습니다.": "Please log in to add a VIP list.",
+      "로그인 되었습니다. 환영합니다! 🎉": "You are logged in. Welcome!",
+      "로그아웃 되었습니다.": "You are logged out.",
+      "이름과 연락처를 입력해주세요.": "Please enter name and phone number.",
+      "새 VIP 명단이 추가되었습니다! 🙏": "A new VIP was added!",
+      "이름과 연락처는 필수입니다.": "Name and phone number are required.",
+      "관리자만 접근할 수 있습니다.": "Admin access only.",
+      "이메일 주소": "Email address",
+      "홍길동": "John Doe",
+      "예: 3구역, 청년 2팀": "e.g. District 3, Young Adults Team 2",
+      "6자 이상": "At least 6 characters",
+      "이름 또는 연락처 검색": "Search name or phone",
+      "내 이름을 입력하세요": "Enter your name",
+      "선택 사항": "Optional",
+      "담당 사역자에게 전하고 싶은 이야기를 남겨주세요.": "Leave a message for the ministry leader.",
+      "특이사항, 기도 제목 등": "Notes, prayer requests, etc."
+    },
+    ja: {
+      "꿈을심는교회": "夢を植える教会",
+      "꿈을심는교회 로고": "夢を植える教会ロゴ",
+      "다국어 선택": "言語選択",
+      "행사안내": "イベント案内",
+      "VIP명단 작성": "VIPリスト作成",
+      "VIP 명단작성": "VIPリスト作成",
+      "결신카드 작성": "信仰決心カード作成",
+      "전도현황": "伝道状況",
+      "전도대상자": "伝道対象者",
+      "초청발송": "招待送信",
+      "관리자": "管理者",
+      "성도현황": "信徒状況",
+      "회원가입": "会員登録",
+      "로그인": "ログイン",
+      "로그아웃": "ログアウト",
+      "꿈을심는교회 교회창립 19주년 기념": "夢を植える教会 創立19周年記念",
+      "GOSPEL 축제": "GOSPELフェスティバル",
+      "2026년 9월 6일(주일) 오전 11시": "2026年9月6日（日）午前11時",
+      "\"복음의 기쁨, 삶을 새롭게 하는 은혜\" — 함께 예배하며": "「福音の喜び、人生を新しくする恵み」— 共に礼拝し、",
+      "사랑을 나눕니다": "愛を分かち合います",
+      "일": "日",
+      "시간": "時間",
+      "분": "分",
+      "초": "秒",
+      "GOSPEL 축제까지 남은 시간": "GOSPELフェスティバルまでの残り時間",
+      "행사 일정 보기": "スケジュールを見る",
+      "이번 축제에서 만날 특별한 것들": "このフェスティバルで出会う特別なもの",
+      "생명의 말씀": "いのちの御言葉",
+      "삶의 무게에 지쳐있는 당신에게 전하는 특별한 메시지. 김명순 담임목사님의 복음 중심 말씀으로 마음의 참된 안식을 경험하세요.": "人生の重荷に疲れたあなたへ贈る特別なメッセージ。金明順主任牧師の福音中心の御言葉を通して、心の真の安息を体験してください。",
+      "김명순 목사(꿈을심는교회 담임) · 축제강사": "金明順牧師（夢を植える教会 主任牧師）· フェスティバル講師",
+      "찬양 & 경배": "賛美 & 礼拝",
+      "감동적인 워십팀의 라이브 찬양으로 하나님 앞에 나아가세요.": "感動的なワーシップチームの賛美と共に神様の前へ進みましょう。",
+      "삶의 변화 간증": "人生が変えられた証し",
+      "복음으로 삶이 새로워진 성도들의 진솔한 이야기.": "福音によって人生が新しくされた信徒たちの率直な証し。",
+      "1:1 개인 상담 & 기도": "1対1 個人相談 & 祈り",
+      "훈련된 상담 사역자들과 함께하는 개인 기도 및 상담 시간.": "訓練された相談奉仕者と共にする個人の祈りと相談の時間。",
+      "GOSPEL 축제 당일 일정": "GOSPELフェスティバル当日の予定",
+      "꿈을심는교회 교회창립 19주년 기념 · 2026년 9월 6일(주일) 오전 11시": "夢を植える教会 創立19周年記念 · 2026年9月6日（日）午前11時",
+      "9월 6일": "9月6日",
+      "주일": "日曜日",
+      "오전 11시": "午前11時",
+      "GOSPEL 축제 예배": "GOSPELフェスティバル礼拝",
+      "꿈을심는교회 교회창립 19주년을 기념하며 복음의 기쁨과 감사의 은혜를 함께 나누는 예배입니다.": "夢を植える教会 創立19周年を記念し、福音の喜びと感謝の恵みを共に分かち合う礼拝です。",
+      "축제만찬": "フェスティバル愛餐",
+      "GOSPEL 축제 예배 후 함께 식탁의 교제를 나누는 만찬 시간입니다.": "GOSPELフェスティバル礼拝後に、食卓を囲んで交わりを持つ愛餐の時間です。",
+      "각 가정별로 음식을 하나씩 정성껏 준비해 와서 자유롭고, 풍성하게 애찬을 나눕니다.": "各家庭で料理を一品ずつ心を込めて準備し、自由で豊かな愛餐を分かち合います。",
+      "19주년 기념 찬양 콘서트": "19周年記念賛美コンサート",
+      "교회창립 19주년의 감사와 기쁨을 찬양으로 함께 나누는 콘서트입니다.": "教会創立19周年の感謝と喜びを賛美で共に分かち合うコンサートです。",
+      "특별게스트: 안00, 이00 (CCM 가수)": "特別ゲスト: アン00、イ00（CCM歌手）",
+      "오시는 길": "アクセス",
+      "주소": "住所",
+      "서울시 새말로 8길 26, 2층 교회": "ソウル市セマル路8ギル26、2階 教会",
+      "대중교통": "公共交通",
+      "지하철 8호선 장지역 1번 출구, 도보 5분": "地下鉄8号線 長旨駅1番出口から徒歩5分",
+      "문의": "お問い合わせ",
+      "교회 사무실: 02) 2043-0191": "教会事務室: 02) 2043-0191",
+      "꿈을심는교회 담임목사 김명순": "夢を植える教会 主任牧師 金明順",
+      "서울시 새말로 8길 26, 2층 교회 · 02) 2043-0191": "ソウル市セマル路8ギル26、2階 教会 · 02) 2043-0191",
+      "당신의 소중한 사람을": "あなたの大切な人を",
+      "초청해 주세요": "招待してください",
+      "복음의 씨앗이 자라날 수 있도록,": "福音の種が育つように、",
+      "당신의 기도와 초청이 누군가의 인생을 바꿀 수 있습니다.": "あなたの祈りと招待が誰かの人生を変えることがあります。",
+      "성도 로그인": "信徒ログイン",
+      "전도 관리 시스템에 접속합니다": "伝道管理システムに接続します",
+      "Google 계정으로 로그인": "Googleアカウントでログイン",
+      "이메일로 로그인": "メールでログイン",
+      "이메일": "メール",
+      "비밀번호": "パスワード",
+      "계정이 없으신가요?": "アカウントをお持ちでないですか？",
+      "행사 안내로 돌아가기": "イベント案内に戻る",
+      "성도 회원가입": "信徒会員登録",
+      "전도 대상자 관리를 시작하세요": "伝道対象者の管理を始めましょう",
+      "이름 *": "名前 *",
+      "소그룹 / 구역명": "小グループ / 区域名",
+      "이메일 *": "メール *",
+      "비밀번호 *": "パスワード *",
+      "이미 계정이 있으신가요?": "すでにアカウントをお持ちですか？",
+      "전체": "全体",
+      "초청": "招待",
+      "초청한 분들": "招待した方々",
+      "확인": "確認",
+      "참석 확인": "出席確認",
+      "결신": "決心",
+      "결신자": "決心者",
+      "성도별 전도 현황": "信徒別伝道状況",
+      "전체 보기": "すべて見る",
+      "전도 진행 현황": "伝道進行状況",
+      "총 기도 횟수:": "祈りの総回数:",
+      "빠른 실행": "クイック実行",
+      "전도 대상자 관리": "伝道対象者管理",
+      "새 대상자 추가": "新しい対象者を追加",
+      "전도대상자와 관계맺기 체크리스트": "伝道対象者との関係づくりチェックリスト",
+      "완료": "完了",
+      "전체 상태": "すべての状態",
+      "초청전": "招待前",
+      "초청함": "招待済み",
+      "응답대기": "返答待ち",
+      "참석확인": "出席確認",
+      "이름": "名前",
+      "성도": "信徒",
+      "연락처": "連絡先",
+      "관계": "関係",
+      "상태": "状態",
+      "기도": "祈り",
+      "메모": "メモ",
+      "관리": "管理",
+      "불러오는 중...": "読み込み中...",
+      "초청장 발송": "招待状送信",
+      "초청장 & 문자 발송": "招待状 & SMS送信",
+      "결신카드 제출 현황": "信仰決心カード提出状況",
+      "불러오기": "読み込み",
+      "결신 내용": "決心内容",
+      "제출일": "提出日",
+      "당신의": "あなたの",
+      "는": "は",
+      "누구인가요?": "誰ですか？",
+      "VIP 이름 등록하기": "VIP名を登録",
+      "VIP 명단 작성이란?": "VIPリスト作成とは？",
+      "1단계": "ステップ1",
+      "이름 적기": "名前を書く",
+      "2단계": "ステップ2",
+      "매일 기도하기": "毎日祈る",
+      "3단계": "ステップ3",
+      "마음 담아 초청하기": "心を込めて招待する",
+      "결신을 환영합니다!": "信仰決心を歓迎します！",
+      "소중한 결신을 해주셔서 감사합니다.": "大切な決心をしてくださりありがとうございます。",
+      "담당 사역자가 곧 연락드릴 것입니다.": "担当奉仕者がまもなくご連絡します。",
+      "새로운 결신카드 작성": "新しい信仰決心カードを作成",
+      "결신 정보 입력": "決心情報入力",
+      "연락처 *": "連絡先 *",
+      "결신 사항": "決心事項",
+      "예수님을 구주로 영접합니다": "イエス様を救い主として受け入れます",
+      "기도 응답을 경험했습니다": "祈りの応答を体験しました",
+      "세례를 받고 싶습니다": "洗礼を受けたいです",
+      "소그룹(셀)에 참여하겠습니다": "小グループに参加します",
+      "기도 제목 / 전하고 싶은 말": "祈りの課題 / 伝えたいこと",
+      "결신카드 제출하기": "信仰決心カードを提出",
+      "입력하신 정보는 교회 사역에만 사용됩니다": "入力された情報は教会の働きにのみ使用されます",
+      "가족": "家族",
+      "친구": "友人",
+      "직장동료": "職場の同僚",
+      "이웃": "隣人",
+      "학교동료": "学校の友人",
+      "기타": "その他",
+      "취소": "キャンセル",
+      "이메일 주소": "メールアドレス",
+      "비밀번호": "パスワード",
+      "홍길동": "山田太郎",
+      "6자 이상": "6文字以上",
+      "선택 사항": "任意"
+    },
+    zh: {
+      "꿈을심는교회": "植梦教会",
+      "꿈을심는교회 로고": "植梦教会标志",
+      "다국어 선택": "选择语言",
+      "행사안내": "活动介绍",
+      "VIP명단 작성": "填写VIP名单",
+      "VIP 명단작성": "填写VIP名单",
+      "결신카드 작성": "填写决志卡",
+      "전도현황": "传道现况",
+      "전도대상자": "传道对象",
+      "초청발송": "发送邀请",
+      "관리자": "管理员",
+      "성도현황": "会友现况",
+      "회원가입": "注册",
+      "로그인": "登录",
+      "로그아웃": "退出登录",
+      "꿈을심는교회 교회창립 19주년 기념": "植梦教会创立19周年纪念",
+      "GOSPEL 축제": "GOSPEL 福音庆典",
+      "2026년 9월 6일(주일) 오전 11시": "2026年9月6日（周日）上午11点",
+      "\"복음의 기쁨, 삶을 새롭게 하는 은혜\" — 함께 예배하며": "“福音的喜乐，更新生命的恩典” — 一同敬拜并",
+      "사랑을 나눕니다": "分享爱",
+      "일": "天",
+      "시간": "小时",
+      "분": "分",
+      "초": "秒",
+      "GOSPEL 축제까지 남은 시간": "距离GOSPEL福音庆典剩余时间",
+      "행사 일정 보기": "查看日程",
+      "이번 축제에서 만날 특별한 것들": "本次庆典的特别内容",
+      "생명의 말씀": "生命的话语",
+      "삶의 무게에 지쳐있는 당신에게 전하는 특별한 메시지. 김명순 담임목사님의 복음 중심 말씀으로 마음의 참된 안식을 경험하세요.": "献给被生活重担压累之人的特别信息。通过金明顺主任牧师以福音为中心的信息，经历心灵真正的安息。",
+      "김명순 목사(꿈을심는교회 담임) · 축제강사": "金明顺牧师（植梦教会主任牧师）· 庆典讲员",
+      "찬양 & 경배": "赞美与敬拜",
+      "감동적인 워십팀의 라이브 찬양으로 하나님 앞에 나아가세요.": "通过敬拜团队感人的现场赞美来到神面前。",
+      "삶의 변화 간증": "生命改变见证",
+      "복음으로 삶이 새로워진 성도들의 진솔한 이야기.": "因福音生命得更新的会友真实故事。",
+      "1:1 개인 상담 & 기도": "一对一咨询与祷告",
+      "훈련된 상담 사역자들과 함께하는 개인 기도 및 상담 시간.": "与受训服事者一起进行个人祷告和咨询。",
+      "GOSPEL 축제 당일 일정": "GOSPEL福音庆典当日日程",
+      "꿈을심는교회 교회창립 19주년 기념 · 2026년 9월 6일(주일) 오전 11시": "植梦教会创立19周年纪念 · 2026年9月6日（周日）上午11点",
+      "9월 6일": "9月6日",
+      "주일": "周日",
+      "오전 11시": "上午11点",
+      "GOSPEL 축제 예배": "GOSPEL福音庆典礼拜",
+      "꿈을심는교회 교회창립 19주년을 기념하며 복음의 기쁨과 감사의 은혜를 함께 나누는 예배입니다.": "这是纪念植梦教会创立19周年，并一同分享福音喜乐与感恩恩典的礼拜。",
+      "축제만찬": "庆典爱餐",
+      "GOSPEL 축제 예배 후 함께 식탁의 교제를 나누는 만찬 시간입니다.": "GOSPEL福音庆典礼拜后，一同围桌交通的爱餐时间。",
+      "각 가정별로 음식을 하나씩 정성껏 준비해 와서 자유롭고, 풍성하게 애찬을 나눕니다.": "每个家庭用心预备一道菜，自由而丰盛地分享爱餐。",
+      "19주년 기념 찬양 콘서트": "19周年纪念赞美音乐会",
+      "교회창립 19주년의 감사와 기쁨을 찬양으로 함께 나누는 콘서트입니다.": "以赞美一同分享教会创立19周年感谢与喜乐的音乐会。",
+      "특별게스트: 안00, 이00 (CCM 가수)": "特别嘉宾: 安00、李00（CCM歌手）",
+      "오시는 길": "交通指南",
+      "주소": "地址",
+      "서울시 새말로 8길 26, 2층 교회": "首尔市 Saemal-ro 8-gil 26号 2楼 教会",
+      "대중교통": "公共交通",
+      "지하철 8호선 장지역 1번 출구, 도보 5분": "地铁8号线长旨站1号出口步行5分钟",
+      "문의": "咨询",
+      "교회 사무실: 02) 2043-0191": "教会办公室: 02) 2043-0191",
+      "꿈을심는교회 담임목사 김명순": "植梦教会主任牧师 金明顺",
+      "서울시 새말로 8길 26, 2층 교회 · 02) 2043-0191": "首尔市 Saemal-ro 8-gil 26号 2楼 教会 · 02) 2043-0191",
+      "당신의 소중한 사람을": "邀请你珍贵的人",
+      "초청해 주세요": "一同参加",
+      "복음의 씨앗이 자라날 수 있도록,": "愿福音的种子成长，",
+      "당신의 기도와 초청이 누군가의 인생을 바꿀 수 있습니다.": "你的祷告和邀请能改变一个人的生命。",
+      "성도 로그인": "会友登录",
+      "전도 관리 시스템에 접속합니다": "进入传道管理系统",
+      "Google 계정으로 로그인": "使用Google账号登录",
+      "이메일로 로그인": "使用电子邮件登录",
+      "이메일": "电子邮件",
+      "비밀번호": "密码",
+      "계정이 없으신가요?": "还没有账号？",
+      "행사 안내로 돌아가기": "返回活动介绍",
+      "성도 회원가입": "会友注册",
+      "전도 대상자 관리를 시작하세요": "开始管理传道对象",
+      "이름 *": "姓名 *",
+      "소그룹 / 구역명": "小组 / 区域",
+      "이메일 *": "电子邮件 *",
+      "비밀번호 *": "密码 *",
+      "이미 계정이 있으신가요?": "已有账号？",
+      "전체": "全部",
+      "초청": "邀请",
+      "초청한 분들": "已邀请",
+      "확인": "确认",
+      "참석 확인": "确认参加",
+      "결신": "决志",
+      "결신자": "决志者",
+      "성도별 전도 현황": "按会友查看传道现况",
+      "전체 보기": "查看全部",
+      "전도 진행 현황": "传道进展",
+      "총 기도 횟수:": "祷告总次数:",
+      "빠른 실행": "快速操作",
+      "전도 대상자 관리": "管理传道对象",
+      "새 대상자 추가": "添加对象",
+      "전체 상태": "全部状态",
+      "초청전": "未邀请",
+      "초청함": "已邀请",
+      "응답대기": "等待回应",
+      "참석확인": "确认参加",
+      "이름": "姓名",
+      "성도": "会友",
+      "연락처": "联系方式",
+      "관계": "关系",
+      "상태": "状态",
+      "기도": "祷告",
+      "메모": "备注",
+      "관리": "管理",
+      "불러오는 중...": "加载中...",
+      "초청장 발송": "发送邀请函",
+      "결신카드 제출 현황": "决志卡提交现况",
+      "불러오기": "加载",
+      "결신 내용": "决志内容",
+      "제출일": "提交日期",
+      "당신의": "你的",
+      "는": "是",
+      "누구인가요?": "谁？",
+      "VIP 이름 등록하기": "登记VIP姓名",
+      "VIP 명단 작성이란?": "什么是VIP名单？",
+      "1단계": "第1步",
+      "이름 적기": "写下姓名",
+      "2단계": "第2步",
+      "매일 기도하기": "每日祷告",
+      "3단계": "第3步",
+      "마음 담아 초청하기": "真诚邀请",
+      "결신을 환영합니다!": "欢迎你的决志！",
+      "소중한 결신을 해주셔서 감사합니다.": "感谢你作出宝贵的决志。",
+      "담당 사역자가 곧 연락드릴 것입니다.": "负责同工会尽快与你联系。",
+      "새로운 결신카드 작성": "填写新的决志卡",
+      "결신 정보 입력": "填写决志信息",
+      "연락처 *": "联系方式 *",
+      "결신 사항": "决志事项",
+      "예수님을 구주로 영접합니다": "我接受耶稣为救主",
+      "기도 응답을 경험했습니다": "我经历了祷告蒙应允",
+      "세례를 받고 싶습니다": "我想接受洗礼",
+      "소그룹(셀)에 참여하겠습니다": "我想参加小组",
+      "기도 제목 / 전하고 싶은 말": "祷告题目 / 想说的话",
+      "결신카드 제출하기": "提交决志卡",
+      "입력하신 정보는 교회 사역에만 사용됩니다": "所填写的信息仅用于教会事工",
+      "가족": "家人",
+      "친구": "朋友",
+      "직장동료": "同事",
+      "이웃": "邻居",
+      "학교동료": "同学",
+      "기타": "其他",
+      "취소": "取消",
+      "이메일 주소": "电子邮件地址",
+      "홍길동": "张三",
+      "6자 이상": "至少6个字符",
+      "선택 사항": "可选"
+    }
+  };
+
+  const originalText = new WeakMap();
+  const originalAttr = new WeakMap();
+  const attrs = ["placeholder", "title", "aria-label", "alt"];
+  let currentLang = localStorage.getItem("gospelLanguage") || "ko";
+
+  function localizedText(text, lang) {
+    const trimmed = text.trim();
+    if (!trimmed) return text;
+    if (lang === "ko") return trimmed;
+    const dict = i18n[lang] || {};
+    if (dict[trimmed] !== undefined) return dict[trimmed];
+    if (i18n.en?.[trimmed] !== undefined) return i18n.en[trimmed];
+    const count = trimmed.match(/^(\d+)(명|회)$/);
+    if (count) {
+      const suffix = count[2] === "명"
+        ? { en: " people", ja: "名", zh: "人" }
+        : { en: " times", ja: "回", zh: "次" };
+      return count[1] + (suffix[lang] || count[2]);
+    }
+    return trimmed;
+  }
+
+  function applyTextNode(node, lang) {
+    if (!originalText.has(node)) originalText.set(node, node.nodeValue);
+    const source = originalText.get(node);
+    const translated = localizedText(source, lang);
+    const leading = source.match(/^\s*/)?.[0] || "";
+    const trailing = source.match(/\s*$/)?.[0] || "";
+    const nextValue = leading + translated + trailing;
+    if (node.nodeValue !== nextValue) node.nodeValue = nextValue;
+  }
+
+  function applyAttributes(el, lang) {
+    attrs.forEach((attr) => {
+      if (!el.hasAttribute?.(attr)) return;
+      let map = originalAttr.get(el);
+      if (!map) {
+        map = {};
+        originalAttr.set(el, map);
+      }
+      if (!map[attr]) map[attr] = el.getAttribute(attr);
+      el.setAttribute(attr, localizedText(map[attr], lang));
+    });
+  }
+
+  function walk(root, lang) {
+    if (!root || ["SCRIPT", "STYLE", "NOSCRIPT"].includes(root.nodeName)) return;
+    if (root.nodeType === Node.TEXT_NODE) {
+      applyTextNode(root, lang);
+      return;
+    }
+    if (root.nodeType !== Node.ELEMENT_NODE && root !== document) return;
+    if (root.nodeType === Node.ELEMENT_NODE) applyAttributes(root, lang);
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT | NodeFilter.SHOW_ELEMENT, {
+      acceptNode(node) {
+        const parent = node.parentElement;
+        if (parent && ["SCRIPT", "STYLE", "NOSCRIPT"].includes(parent.tagName)) return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+    let node;
+    while ((node = walker.nextNode())) {
+      if (node.nodeType === Node.TEXT_NODE) applyTextNode(node, lang);
+      else applyAttributes(node, lang);
+    }
+  }
+
+  function applyLanguage(lang) {
+    currentLang = lang;
+    localStorage.setItem("gospelLanguage", lang);
+    document.documentElement.lang = lang === "ko" ? "ko" : lang;
+    const titleMap = {
+      ko: "GOSPEL 축제 2026 | 꿈을심는교회",
+      en: "GOSPEL Festival 2026 | Dream Planting Church",
+      ja: "GOSPELフェスティバル 2026 | 夢を植える教会",
+      zh: "GOSPEL福音庆典 2026 | 植梦教会"
+    };
+    document.title = titleMap[lang] || titleMap.ko;
+    walk(document.body, lang);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const select = document.getElementById("languageSelect");
+    if (select) {
+      select.value = currentLang;
+      select.addEventListener("change", (event) => applyLanguage(event.target.value));
+    }
+    setTimeout(() => applyLanguage(currentLang), 50);
+    const observer = new MutationObserver((mutations) => {
+      if (currentLang === "ko") return;
+      mutations.forEach((mutation) => {
+        mutation.addedNodes.forEach((node) => walk(node, currentLang));
+        if (mutation.type === "characterData") applyTextNode(mutation.target, currentLang);
+      });
+    });
+    observer.observe(document.body, { childList: true, subtree: true, characterData: true });
+  });
+})();
 </script>
 </body>
 </html>
