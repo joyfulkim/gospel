@@ -137,14 +137,6 @@
       </template>
       <span class="nav-link" :class="currentView==='decision'?'on':''" @click="navigate('decision')">결신카드 작성</span>
       <span class="nav-link" :class="currentView==='directions'?'on':''" @click="navigate('directions')">오시는 길</span>
-      <template x-if="isAdmin">
-        <span class="nav-link" :class="currentView==='invite'?'on':''" @click="navigate('invite')">초청발송</span>
-      </template>
-      <template x-if="isAdmin">
-        <span class="nav-link" :class="currentView==='admin-members'?'on':''" @click="navigate('admin-members')">
-          <span class="badge b-amber mr-1">관리자</span>성도현황
-        </span>
-      </template>
     </div>
 
     <div class="flex items-center gap-2">
@@ -165,11 +157,33 @@
       </template>
       <template x-if="isLoggedIn">
         <div class="flex items-center gap-2">
+          <template x-if="!isAdmin">
           <div class="hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-full text-xs" style="background:rgba(255,255,255,.05)">
             <iconify-icon icon="solar:user-circle-bold" style="font-size:15px;color:#f59e0b"></iconify-icon>
             <span class="text-zinc-300" x-text="profile?.full_name || '로딩중'"></span>
-            <template x-if="isAdmin"><span class="badge b-amber text-xs">관리자</span></template>
           </div>
+          </template>
+          <template x-if="isAdmin">
+          <div class="relative" @click.outside="adminMenuOpen=false">
+            <button @click="adminMenuOpen=!adminMenuOpen" class="flex items-center gap-1.5 px-3 py-1 rounded-full text-xs transition-all" title="관리자 메뉴" aria-label="관리자 메뉴" :style="adminMenuOpen || ['invite','admin-members'].includes(currentView) ? 'background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.28);color:#fef3c7' : 'background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08)'">
+              <iconify-icon icon="solar:user-circle-bold" style="font-size:15px;color:#f59e0b"></iconify-icon>
+              <span class="hidden sm:inline text-zinc-300" x-text="profile?.full_name || '로딩중'"></span>
+              <span class="badge b-amber text-xs">관리자</span>
+              <iconify-icon icon="solar:alt-arrow-down-bold" :style="'font-size:13px;color:#fbbf24;transition:.2s;transform:'+(adminMenuOpen?'rotate(180deg)':'rotate(0deg)')"></iconify-icon>
+            </button>
+            <div x-show="adminMenuOpen" x-transition x-cloak class="absolute right-0 top-[calc(100%+8px)] w-44 rounded-xl overflow-hidden shadow-2xl z-[80]" style="background:rgba(12,12,12,.98);border:1px solid rgba(245,158,11,.18);backdrop-filter:blur(18px)">
+              <div class="px-3 py-2 text-[11px] font-semibold text-amber-300" style="border-bottom:1px solid rgba(255,255,255,.07)">관리자 메뉴</div>
+              <button @click="navigate('invite'); adminMenuOpen=false" class="w-full flex items-center gap-2.5 px-3 py-2.5 text-left text-sm hover:bg-white/5 transition-colors" :class="currentView==='invite'?'text-amber-300':'text-zinc-300'">
+                <iconify-icon icon="solar:letter-bold" style="font-size:16px;color:#f59e0b"></iconify-icon>
+                <span>초청발송</span>
+              </button>
+              <button @click="navigate('admin-members'); adminMenuOpen=false" class="w-full flex items-center gap-2.5 px-3 py-2.5 text-left text-sm hover:bg-white/5 transition-colors" :class="currentView==='admin-members'?'text-amber-300':'text-zinc-300'">
+                <iconify-icon icon="solar:users-group-rounded-bold" style="font-size:16px;color:#f59e0b"></iconify-icon>
+                <span>성도현황</span>
+              </button>
+            </div>
+          </div>
+          </template>
           <button @click="logout()" class="btn-ghost logout-btn" title="로그아웃" aria-label="로그아웃">
             <span>로그아웃</span>
           </button>
@@ -1366,6 +1380,7 @@ function gospel() {
     loading: false,
     user: null,
     profile: null,
+    adminMenuOpen: false,
 
     get isLoggedIn() { return !!this.user; },
     get isAdmin()    { return this.profile?.role === 'admin'; },
@@ -1513,6 +1528,7 @@ function gospel() {
 
     async logout() {
       await this.auth.signOut();
+      this.adminMenuOpen = false;
       this.navigate('landing');
       this.addToast('로그아웃 되었습니다.', 'success');
     },
@@ -1842,6 +1858,7 @@ ${sender} 드림`;
     },
 
     navigate(view) {
+      this.adminMenuOpen = false;
       const memberViews = ['dashboard', 'targets'];
       const adminViews  = ['admin-members', 'invite'];
       if ([...memberViews, ...adminViews].includes(view) && !this.isLoggedIn) {
@@ -1893,6 +1910,7 @@ ${sender} 드림`;
       "전도대상자": "Outreach Contacts",
       "초청발송": "Send Invitations",
       "관리자": "Admin",
+      "관리자 메뉴": "Admin Menu",
       "성도현황": "Members",
       "회원가입": "Sign Up",
       "로그인": "Log In",
@@ -2148,6 +2166,7 @@ ${sender} 드림`;
       "전도대상자": "伝道対象者",
       "초청발송": "招待送信",
       "관리자": "管理者",
+      "관리자 메뉴": "管理者メニュー",
       "성도현황": "信徒状況",
       "회원가입": "会員登録",
       "로그인": "ログイン",
@@ -2321,6 +2340,7 @@ ${sender} 드림`;
       "전도대상자": "传道对象",
       "초청발송": "发送邀请",
       "관리자": "管理员",
+      "관리자 메뉴": "管理员菜单",
       "성도현황": "会友现况",
       "회원가입": "注册",
       "로그인": "登录",
