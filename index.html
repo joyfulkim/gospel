@@ -111,10 +111,10 @@
 
     <div class="hidden md:flex items-center gap-5" style="font-size:17px">
       <span class="nav-link" :class="currentView==='landing'?'on':''" @click="navigate('landing')">행사안내</span>
-      <span class="nav-link" :class="currentView==='decision'?'on':''" @click="navigate('decision')">결단카드</span>
       <span class="nav-link font-semibold flex items-center gap-1.5" :class="currentView==='vip'?'on':''" @click="navigate('vip')" style="color:#fbbf24">
         <iconify-icon icon="solar:crown-bold" style="font-size:14px"></iconify-icon>VIP명단 작성
       </span>
+      <span class="nav-link" :class="currentView==='decision'?'on':''" @click="navigate('decision')">결신카드 작성</span>
       <template x-if="isLoggedIn">
         <span class="nav-link" :class="currentView==='dashboard'?'on':''" @click="navigate('dashboard')">전도현황</span>
       </template>
@@ -188,7 +188,7 @@
           <div class="ic"><iconify-icon icon="solar:calendar-bold" style="font-size:13px;color:#000"></iconify-icon></div>행사 일정 보기
         </button>
         <button @click="navigate('decision')" class="btn-ghost">
-          <iconify-icon icon="solar:heart-bold" style="font-size:15px;color:#f59e0b"></iconify-icon>결단 카드 작성
+          <iconify-icon icon="solar:heart-bold" style="font-size:15px;color:#f59e0b"></iconify-icon>결신카드 작성
         </button>
       </div>
     </div>
@@ -320,7 +320,7 @@
           <div class="ic"><iconify-icon icon="solar:crown-bold" style="font-size:13px;color:#000"></iconify-icon></div>VIP 명단작성
         </button>
         <button @click="navigate('decision')" class="btn-ghost">
-          <iconify-icon icon="solar:heart-bold" style="font-size:15px;color:#f59e0b"></iconify-icon>결단 카드 작성하기
+          <iconify-icon icon="solar:heart-bold" style="font-size:15px;color:#f59e0b"></iconify-icon>결신카드 작성
         </button>
       </div>
     </div>
@@ -473,10 +473,10 @@
       <div class="bezel aup d4"><div class="bezel-inner p-5">
         <div class="flex items-center justify-between mb-3">
           <div class="stat-icon" style="background:rgba(168,85,247,.1)"><iconify-icon icon="solar:heart-bold" style="font-size:20px;color:#c084fc"></iconify-icon></div>
-          <span class="badge b-purple">결단</span>
+          <span class="badge b-purple">결신</span>
         </div>
         <div class="text-3xl font-bold mb-1" x-text="stats.decided">0</div>
-        <div class="text-xs text-zinc-500">결단자</div>
+        <div class="text-xs text-zinc-500">결신자</div>
       </div></div>
     </div>
 
@@ -538,7 +538,7 @@
             </button>
           </template>
           <button @click="navigate('decision')" class="btn-ghost w-full justify-start btn-sm gap-3">
-            <iconify-icon icon="solar:heart-bold" style="font-size:16px;color:#c084fc"></iconify-icon>결단 카드 (공개)
+            <iconify-icon icon="solar:heart-bold" style="font-size:16px;color:#c084fc"></iconify-icon>결신카드 작성
           </button>
           <template x-if="isAdmin">
             <button @click="navigate('admin-members')" class="btn-ghost w-full justify-start btn-sm gap-3">
@@ -644,7 +644,7 @@
         <option value="초청함">초청함</option>
         <option value="응답대기">응답대기</option>
         <option value="참석확인">참석확인</option>
-        <option value="결단">결단</option>
+        <option value="결신">결신</option>
       </select>
     </div>
 
@@ -858,19 +858,19 @@
     <div class="bezel mb-6"><div class="bezel-inner p-5">
       <div class="flex items-center justify-between mb-4">
         <h3 class="font-bold flex items-center gap-2">
-          <iconify-icon icon="solar:heart-bold" style="font-size:16px;color:#c084fc"></iconify-icon>결단 카드 제출 현황
+          <iconify-icon icon="solar:heart-bold" style="font-size:16px;color:#c084fc"></iconify-icon>결신카드 제출 현황
         </h3>
         <button @click="loadDecisions()" class="btn-ghost btn-sm">불러오기</button>
       </div>
       <template x-if="decisions.length===0">
-        <div class="text-center py-6 text-zinc-600 text-sm">결단 카드 불러오기 버튼을 눌러주세요</div>
+        <div class="text-center py-6 text-zinc-600 text-sm">결신카드 불러오기 버튼을 눌러주세요</div>
       </template>
       <div class="overflow-x-auto" x-show="decisions.length>0">
         <table class="tbl w-full">
           <thead><tr>
             <th class="text-left">이름</th>
             <th class="text-left">연락처</th>
-            <th class="text-left">결단 내용</th>
+            <th class="text-left">결신 내용</th>
             <th class="text-left">제출일</th>
           </tr></thead>
           <tbody>
@@ -1088,10 +1088,10 @@
         <div class="w-20 h-20 rounded-full mx-auto mb-6 flex items-center justify-center" style="background:rgba(245,158,11,.12);border:2px solid rgba(245,158,11,.3)">
           <iconify-icon icon="solar:heart-bold" style="font-size:40px;color:#f59e0b"></iconify-icon>
         </div>
-        <h2 class="text-3xl font-bold mb-3 amber-text">결단을 환영합니다!</h2>
-        <p class="text-zinc-400 leading-relaxed mb-8">소중한 결단을 해주셔서 감사합니다.<br>담당 사역자가 곧 연락드릴 것입니다.</p>
+        <h2 class="text-3xl font-bold mb-3 amber-text">결신을 환영합니다!</h2>
+        <p class="text-zinc-400 leading-relaxed mb-8">소중한 결신을 해주셔서 감사합니다.<br>담당 사역자가 곧 연락드릴 것입니다.</p>
         <div class="flex flex-col gap-3">
-          <button @click="decisionSubmitted=false;decisionForm={name:'',phone:'',email:'',decision:false,pray:false,baptism:false,cell:false,notes:''}" class="btn-primary w-full justify-center">새로운 결단 작성</button>
+          <button @click="decisionSubmitted=false;decisionForm={name:'',phone:'',email:'',decision:false,pray:false,baptism:false,cell:false,notes:''}" class="btn-primary w-full justify-center">새로운 결신카드 작성</button>
           <button @click="navigate('landing')" class="btn-ghost w-full justify-center">행사 안내로 돌아가기</button>
         </div>
       </div>
@@ -1101,8 +1101,8 @@
       <div>
         <div class="text-center mb-8 gospel-glow">
           <p class="text-xs font-semibold text-amber-500 tracking-widest mb-3">DECISION CARD</p>
-          <h1 class="text-3xl md:text-4xl font-bold mb-4">결단 카드</h1>
-          <p class="text-zinc-400 text-sm leading-relaxed">복음 안에서 새로운 결단을 하신 분들을 위한 카드입니다.</p>
+          <h1 class="text-3xl md:text-4xl font-bold mb-4">결신카드 작성</h1>
+          <p class="text-zinc-400 text-sm leading-relaxed">복음 안에서 새로운 결신을 하신 분들을 위한 카드입니다.</p>
         </div>
 
         <div class="bezel mb-5"><div class="bezel-inner p-6">
@@ -1120,7 +1120,7 @@
         </div></div>
 
         <div class="bezel"><div class="bezel-inner p-6 space-y-5">
-          <h3 class="font-bold flex items-center gap-2"><iconify-icon icon="solar:pen-bold" style="font-size:16px;color:#f59e0b"></iconify-icon>결단 정보 입력</h3>
+          <h3 class="font-bold flex items-center gap-2"><iconify-icon icon="solar:pen-bold" style="font-size:16px;color:#f59e0b"></iconify-icon>결신 정보 입력</h3>
           <div class="grid grid-cols-2 gap-3">
             <div><label class="block text-xs font-semibold text-zinc-400 mb-1.5">이름 *</label><input x-model="decisionForm.name" type="text" placeholder="홍길동" class="inp"></div>
             <div><label class="block text-xs font-semibold text-zinc-400 mb-1.5">연락처 *</label><input x-model="decisionForm.phone" type="tel" placeholder="010-0000-0000" class="inp"></div>
@@ -1128,11 +1128,11 @@
           <div><label class="block text-xs font-semibold text-zinc-400 mb-1.5">이메일</label><input x-model="decisionForm.email" type="email" placeholder="선택 사항" class="inp"></div>
 
           <div>
-            <label class="block text-xs font-semibold text-zinc-400 mb-3">결단 사항</label>
+            <label class="block text-xs font-semibold text-zinc-400 mb-3">결신 사항</label>
             <div class="space-y-2.5">
               <label class="flex items-start gap-3 p-3.5 rounded-xl cursor-pointer border transition-all" :class="decisionForm.decision?'border-amber-500/30 bg-amber-500/5':'border-white/6 hover:bg-white/2'" style="border-style:solid">
                 <input type="checkbox" x-model="decisionForm.decision" class="mt-0.5 flex-shrink-0" style="accent-color:#f59e0b;width:16px;height:16px">
-                <div><div class="font-semibold text-sm">예수님을 구주로 영접합니다</div><div class="text-xs text-zinc-500 mt-0.5">오늘 처음으로 예수님을 나의 구주로 믿기로 결단합니다</div></div>
+                <div><div class="font-semibold text-sm">예수님을 구주로 영접합니다</div><div class="text-xs text-zinc-500 mt-0.5">오늘 처음으로 예수님을 나의 구주로 믿기로 결신합니다</div></div>
               </label>
               <label class="flex items-start gap-3 p-3.5 rounded-xl cursor-pointer border transition-all" :class="decisionForm.pray?'border-blue-500/30 bg-blue-500/5':'border-white/6 hover:bg-white/2'" style="border-style:solid">
                 <input type="checkbox" x-model="decisionForm.pray" class="mt-0.5 flex-shrink-0" style="accent-color:#60a5fa;width:16px;height:16px">
@@ -1153,7 +1153,7 @@
 
           <button @click="submitDecision()" :disabled="loading" class="btn-primary w-full justify-center">
             <div class="ic"><iconify-icon icon="solar:heart-bold" style="font-size:14px;color:#000"></iconify-icon></div>
-            <span x-text="loading?'제출 중...':'결단 카드 제출하기'"></span>
+            <span x-text="loading?'제출 중...':'결신카드 제출하기'"></span>
           </button>
           <p class="text-xs text-center text-zinc-600">입력하신 정보는 교회 사역에만 사용됩니다</p>
         </div></div>
@@ -1181,7 +1181,7 @@
           <select x-model="targetForm.relationship" class="inp"><option>가족</option><option>친구</option><option>직장동료</option><option>이웃</option><option>학교동료</option><option>기타</option></select>
         </div>
         <div><label class="block text-xs font-semibold text-zinc-400 mb-1.5">상태</label>
-          <select x-model="targetForm.status" class="inp"><option>초청전</option><option>초청함</option><option>응답대기</option><option>참석확인</option><option>결단</option></select>
+          <select x-model="targetForm.status" class="inp"><option>초청전</option><option>초청함</option><option>응답대기</option><option>참석확인</option><option>결신</option></select>
         </div>
       </div>
       <div><label class="block text-xs font-semibold text-zinc-400 mb-1.5">메모</label><textarea x-model="targetForm.notes" placeholder="특이사항, 기도 제목 등" class="inp" style="min-height:70px"></textarea></div>
@@ -1520,7 +1520,7 @@ function gospel() {
         total:     this.targets.length,
         invited:   this.targets.filter(t => t.status !== '초청전').length,
         confirmed: this.targets.filter(t => t.status === '참석확인').length,
-        decided:   this.targets.filter(t => t.status === '결단').length,
+        decided:   this.targets.filter(t => ['결단', '결신'].includes(t.status)).length,
         prayers:   this.targets.reduce((s, t) => s + (t.prayer_count || 0), 0),
       };
     },
@@ -1529,12 +1529,12 @@ function gospel() {
       return [
         { label:'초청한 분들', count:this.stats.invited,   color:'linear-gradient(90deg,#60a5fa,#3b82f6)' },
         { label:'참석 확인',   count:this.stats.confirmed, color:'linear-gradient(90deg,#4ade80,#22c55e)' },
-        { label:'결단자',      count:this.stats.decided,   color:'linear-gradient(90deg,#c084fc,#a855f7)' },
+        { label:'결신자',      count:this.stats.decided,   color:'linear-gradient(90deg,#c084fc,#a855f7)' },
       ];
     },
 
     badgeClass(s) {
-      return {'초청전':'b-gray','초청함':'b-blue','응답대기':'b-amber','참석확인':'b-green','결단':'b-purple'}[s]||'b-gray';
+      return {'초청전':'b-gray','초청함':'b-blue','응답대기':'b-amber','참석확인':'b-green','결단':'b-purple','결신':'b-purple'}[s]||'b-gray';
     },
 
     // ── INVITE ──────────────────────────────────────────────────
