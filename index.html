@@ -126,6 +126,7 @@
 
     <div class="hidden md:flex items-center gap-5" style="font-size:17px">
       <span class="nav-link" :class="currentView==='landing'?'on':''" @click="navigate('landing')">행사안내</span>
+      <span class="nav-link" :class="currentView==='directions'?'on':''" @click="navigate('directions')">오시는 길</span>
       <span class="nav-link font-semibold flex items-center gap-1.5" :class="currentView==='vip'?'on':''" @click="navigate('vip')" style="color:#fbbf24">
         <iconify-icon icon="solar:crown-bold" style="font-size:14px"></iconify-icon>VIP명단 작성
       </span>
@@ -321,6 +322,9 @@
             <div class="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0" style="background:rgba(34,197,94,.08)"><iconify-icon icon="solar:phone-bold" style="font-size:18px;color:#4ade80"></iconify-icon></div>
             <div><div class="font-semibold text-sm mb-0.5">문의</div><div class="text-zinc-400 text-sm">교회 사무실: 02) 2043-0191</div></div>
           </div>
+          <button @click="navigate('directions')" class="btn-ghost btn-sm mt-3">
+            <iconify-icon icon="solar:map-arrow-right-bold" style="font-size:15px;color:#f59e0b"></iconify-icon>자세한 길 안내 보기
+          </button>
         </div>
       </div>
       <div class="bezel"><div class="bezel-inner overflow-hidden rounded-[17px]">
@@ -356,6 +360,130 @@
       <div class="text-zinc-600 text-center" style="font-size:12px">서울시 새말로 8길 26, 2층 교회 · 02) 2043-0191</div>
     </div>
   </footer>
+</div>
+
+<!-- ═══ DIRECTIONS VIEW ═══════════════════════════════════════ -->
+<div x-show="currentView==='directions'" x-cloak class="min-h-[100dvh] pt-20 pb-16 px-5">
+  <section class="max-w-6xl mx-auto">
+    <div class="grid lg:grid-cols-[1fr_1.18fr] gap-8 items-stretch">
+      <div class="flex flex-col justify-center py-8">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-semibold w-fit mb-5" style="background:rgba(245,158,11,.1);border:1px solid rgba(245,158,11,.24);color:#fbbf24">
+          <iconify-icon icon="solar:map-point-wave-bold" style="font-size:15px"></iconify-icon>
+          GOSPEL 축제 오시는 길
+        </div>
+        <h1 class="text-4xl md:text-6xl font-black leading-tight mb-5">
+          꿈을심는교회로<br><span class="amber-text">찾아오시는 길</span>
+        </h1>
+        <p class="text-zinc-400 text-base md:text-lg leading-relaxed mb-8">
+          2026년 9월 6일(주일) 오전 11시, GOSPEL 축제가 꿈을심는교회에서 열립니다. 장지역에서 가까운 예배당으로 편안하게 오실 수 있도록 안내드립니다.
+        </p>
+        <div class="flex flex-wrap gap-3">
+          <a class="btn-primary" href="https://www.google.com/maps/search/?api=1&query=%EC%84%9C%EC%9A%B8%EC%8B%9C%20%EC%83%88%EB%A7%90%EB%A1%9C%208%EA%B8%B8%2026%202%EC%B8%B5" target="_blank" rel="noopener">
+            <div class="ic"><iconify-icon icon="solar:map-arrow-right-bold" style="font-size:14px;color:#000"></iconify-icon></div>지도 앱으로 길찾기
+          </a>
+          <a class="btn-ghost" href="tel:0220430191">
+            <iconify-icon icon="solar:phone-calling-rounded-bold" style="font-size:16px;color:#4ade80"></iconify-icon>전화 문의
+          </a>
+        </div>
+      </div>
+
+      <div class="bezel min-h-[420px]">
+        <div class="bezel-inner overflow-hidden">
+          <iframe
+            title="꿈을심는교회 오시는 길 지도"
+            src="https://www.google.com/maps?q=%EC%84%9C%EC%9A%B8%EC%8B%9C%20%EC%83%88%EB%A7%90%EB%A1%9C%208%EA%B8%B8%2026%202%EC%B8%B5%20%EA%B5%90%ED%9A%8C&output=embed"
+            class="w-full h-[420px] md:h-[520px]"
+            style="border:0;filter:saturate(.95) contrast(1.05)"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-4 mt-10">
+      <div class="bezel"><div class="bezel-inner p-5">
+        <div class="w-11 h-11 rounded-xl flex items-center justify-center mb-4" style="background:rgba(245,158,11,.1)">
+          <iconify-icon icon="solar:map-point-bold" style="font-size:22px;color:#f59e0b"></iconify-icon>
+        </div>
+        <div class="text-xs font-semibold text-amber-400 mb-2">ADDRESS</div>
+        <h2 class="font-bold text-xl mb-2">주소</h2>
+        <p class="text-zinc-400 text-sm leading-relaxed">서울시 새말로 8길 26, 2층 교회</p>
+      </div></div>
+      <div class="bezel"><div class="bezel-inner p-5">
+        <div class="w-11 h-11 rounded-xl flex items-center justify-center mb-4" style="background:rgba(99,102,241,.1)">
+          <iconify-icon icon="solar:bus-bold" style="font-size:22px;color:#818cf8"></iconify-icon>
+        </div>
+        <div class="text-xs font-semibold text-indigo-300 mb-2">TRANSIT</div>
+        <h2 class="font-bold text-xl mb-2">대중교통</h2>
+        <p class="text-zinc-400 text-sm leading-relaxed">지하철 8호선 장지역 1번 출구, 도보 5분</p>
+      </div></div>
+      <div class="bezel"><div class="bezel-inner p-5">
+        <div class="w-11 h-11 rounded-xl flex items-center justify-center mb-4" style="background:rgba(34,197,94,.08)">
+          <iconify-icon icon="solar:phone-bold" style="font-size:22px;color:#4ade80"></iconify-icon>
+        </div>
+        <div class="text-xs font-semibold text-green-300 mb-2">CONTACT</div>
+        <h2 class="font-bold text-xl mb-2">문의</h2>
+        <p class="text-zinc-400 text-sm leading-relaxed">교회 사무실: 02) 2043-0191</p>
+      </div></div>
+    </div>
+
+    <div class="grid lg:grid-cols-[1fr_1fr] gap-6 mt-6">
+      <div class="bezel"><div class="bezel-inner p-6 md:p-7">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:rgba(245,158,11,.1)">
+            <iconify-icon icon="solar:route-bold" style="font-size:20px;color:#f59e0b"></iconify-icon>
+          </div>
+          <h2 class="text-2xl font-bold">장지역에서 오시는 길</h2>
+        </div>
+        <div class="space-y-4">
+          <div class="flex gap-4">
+            <div class="badge b-amber h-fit">1</div>
+            <div>
+              <h3 class="font-semibold mb-1">장지역 1번 출구로 나오세요</h3>
+              <p class="text-sm text-zinc-400 leading-relaxed">지하철 8호선 장지역 1번 출구 기준으로 도보 약 5분 거리입니다.</p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="badge b-amber h-fit">2</div>
+            <div>
+              <h3 class="font-semibold mb-1">새말로 8길 방향으로 이동하세요</h3>
+              <p class="text-sm text-zinc-400 leading-relaxed">주소는 서울시 새말로 8길 26이며, 예배당은 건물 2층에 있습니다.</p>
+            </div>
+          </div>
+          <div class="flex gap-4">
+            <div class="badge b-amber h-fit">3</div>
+            <div>
+              <h3 class="font-semibold mb-1">2층 꿈을심는교회로 올라오세요</h3>
+              <p class="text-sm text-zinc-400 leading-relaxed">처음 방문하시는 분도 편히 안내받으실 수 있도록 축제 안내팀이 함께합니다.</p>
+            </div>
+          </div>
+        </div>
+      </div></div>
+
+      <div class="bezel"><div class="bezel-inner p-6 md:p-7">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="w-10 h-10 rounded-xl flex items-center justify-center" style="background:rgba(59,130,246,.1)">
+            <iconify-icon icon="solar:calendar-mark-bold" style="font-size:20px;color:#60a5fa"></iconify-icon>
+          </div>
+          <h2 class="text-2xl font-bold">방문 전 확인</h2>
+        </div>
+        <div class="space-y-4">
+          <div class="p-4 rounded-xl" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07)">
+            <div class="text-xs text-zinc-500 mb-1">행사 일시</div>
+            <div class="font-semibold">2026년 9월 6일(주일) 오전 11시</div>
+          </div>
+          <div class="p-4 rounded-xl" style="background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.07)">
+            <div class="text-xs text-zinc-500 mb-1">행사명</div>
+            <div class="font-semibold">꿈을심는교회 교회창립 19주년 기념 GOSPEL 축제</div>
+          </div>
+          <div class="p-4 rounded-xl" style="background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.16)">
+            <div class="text-xs text-amber-300 mb-1">안내</div>
+            <div class="text-sm text-zinc-300 leading-relaxed">방문 중 길을 찾기 어려우시면 교회 사무실로 연락해 주세요. 친절하게 안내해 드리겠습니다.</div>
+          </div>
+        </div>
+      </div></div>
+    </div>
+  </section>
 </div>
 
 <!-- ═══ LOGIN VIEW ═════════════════════════════════════════════ -->
@@ -1817,6 +1945,27 @@ ${sender} 드림`;
       "복음의 씨앗이 자라날 수 있도록,": "So the seed of the gospel can grow,",
       "당신의 기도와 초청이 누군가의 인생을 바꿀 수 있습니다.": "your prayer and invitation can change someone's life.",
       "서울시 새말로 8길 26, 2층 교회 · 02) 2043-0191": "2F, 26 Saemal-ro 8-gil, Seoul · 02) 2043-0191",
+      "자세한 길 안내 보기": "View Detailed Directions",
+      "GOSPEL 축제 오시는 길": "Directions to the GOSPEL Festival",
+      "꿈을심는교회로": "To Dream Planting Church",
+      "찾아오시는 길": "How to Get Here",
+      "2026년 9월 6일(주일) 오전 11시, GOSPEL 축제가 꿈을심는교회에서 열립니다. 장지역에서 가까운 예배당으로 편안하게 오실 수 있도록 안내드립니다.": "The GOSPEL Festival will be held at Dream Planting Church on Sunday, September 6, 2026 at 11:00 AM. Here is how to get to the church near Jangji Station.",
+      "지도 앱으로 길찾기": "Get Directions",
+      "전화 문의": "Call the Church",
+      "꿈을심는교회 오시는 길 지도": "Map to Dream Planting Church",
+      "장지역에서 오시는 길": "From Jangji Station",
+      "장지역 1번 출구로 나오세요": "Exit Jangji Station through Exit 1",
+      "지하철 8호선 장지역 1번 출구 기준으로 도보 약 5분 거리입니다.": "It is about a 5-minute walk from Exit 1 of Jangji Station on Subway Line 8.",
+      "새말로 8길 방향으로 이동하세요": "Head toward Saemal-ro 8-gil",
+      "주소는 서울시 새말로 8길 26이며, 예배당은 건물 2층에 있습니다.": "The address is 26 Saemal-ro 8-gil, Seoul, and the sanctuary is on the 2nd floor.",
+      "2층 꿈을심는교회로 올라오세요": "Come up to Dream Planting Church on the 2nd floor",
+      "처음 방문하시는 분도 편히 안내받으실 수 있도록 축제 안내팀이 함께합니다.": "Our festival welcome team will help first-time visitors feel comfortable.",
+      "방문 전 확인": "Before You Visit",
+      "행사 일시": "Event Date & Time",
+      "행사명": "Event",
+      "꿈을심는교회 교회창립 19주년 기념 GOSPEL 축제": "Dream Planting Church 19th Anniversary GOSPEL Festival",
+      "안내": "Note",
+      "방문 중 길을 찾기 어려우시면 교회 사무실로 연락해 주세요. 친절하게 안내해 드리겠습니다.": "If you have trouble finding the church, please call the church office. We will gladly guide you.",
       "성도 로그인": "Member Login",
       "전도 관리 시스템에 접속합니다": "Access the outreach management system",
       "Google 계정으로 로그인": "Sign in with Google",
@@ -2046,6 +2195,27 @@ ${sender} 드림`;
       "교회 사무실: 02) 2043-0191": "教会事務室: 02) 2043-0191",
       "꿈을심는교회 담임목사 김명순": "夢を植える教会 主任牧師 金明順",
       "서울시 새말로 8길 26, 2층 교회 · 02) 2043-0191": "ソウル市セマル路8ギル26、2階 教会 · 02) 2043-0191",
+      "자세한 길 안내 보기": "詳しい道案内を見る",
+      "GOSPEL 축제 오시는 길": "GOSPELフェスティバルへのアクセス",
+      "꿈을심는교회로": "夢を植える教会へ",
+      "찾아오시는 길": "お越しになる道",
+      "2026년 9월 6일(주일) 오전 11시, GOSPEL 축제가 꿈을심는교회에서 열립니다. 장지역에서 가까운 예배당으로 편안하게 오실 수 있도록 안내드립니다.": "2026年9月6日（日）午前11時、GOSPELフェスティバルが夢を植える教会で開かれます。長旨駅から近い礼拝堂まで安心してお越しいただけるようご案内します。",
+      "지도 앱으로 길찾기": "地図アプリで経路を見る",
+      "전화 문의": "電話で問い合わせ",
+      "꿈을심는교회 오시는 길 지도": "夢を植える教会への地図",
+      "장지역에서 오시는 길": "長旨駅からの道順",
+      "장지역 1번 출구로 나오세요": "長旨駅1番出口から出てください",
+      "지하철 8호선 장지역 1번 출구 기준으로 도보 약 5분 거리입니다.": "地下鉄8号線 長旨駅1番出口から徒歩約5分です。",
+      "새말로 8길 방향으로 이동하세요": "セマル路8ギル方面へ進んでください",
+      "주소는 서울시 새말로 8길 26이며, 예배당은 건물 2층에 있습니다.": "住所はソウル市セマル路8ギル26で、礼拝堂は建物の2階にあります。",
+      "2층 꿈을심는교회로 올라오세요": "2階の夢を植える教会へお上がりください",
+      "처음 방문하시는 분도 편히 안내받으실 수 있도록 축제 안내팀이 함께합니다.": "初めての方も安心して来られるよう、フェスティバル案内チームがお手伝いします。",
+      "방문 전 확인": "訪問前の確認",
+      "행사 일시": "イベント日時",
+      "행사명": "イベント名",
+      "꿈을심는교회 교회창립 19주년 기념 GOSPEL 축제": "夢を植える教会 創立19周年記念 GOSPELフェスティバル",
+      "안내": "ご案内",
+      "방문 중 길을 찾기 어려우시면 교회 사무실로 연락해 주세요. 친절하게 안내해 드리겠습니다.": "道に迷われた場合は教会事務室までご連絡ください。親切にご案内します。",
       "당신의 소중한 사람을": "あなたの大切な人を",
       "초청해 주세요": "招待してください",
       "복음의 씨앗이 자라날 수 있도록,": "福音の種が育つように、",
@@ -2198,6 +2368,27 @@ ${sender} 드림`;
       "교회 사무실: 02) 2043-0191": "教会办公室: 02) 2043-0191",
       "꿈을심는교회 담임목사 김명순": "植梦教会主任牧师 金明顺",
       "서울시 새말로 8길 26, 2층 교회 · 02) 2043-0191": "首尔市 Saemal-ro 8-gil 26号 2楼 教会 · 02) 2043-0191",
+      "자세한 길 안내 보기": "查看详细路线",
+      "GOSPEL 축제 오시는 길": "GOSPEL福音庆典交通指南",
+      "꿈을심는교회로": "前往植梦教会",
+      "찾아오시는 길": "交通路线",
+      "2026년 9월 6일(주일) 오전 11시, GOSPEL 축제가 꿈을심는교회에서 열립니다. 장지역에서 가까운 예배당으로 편안하게 오실 수 있도록 안내드립니다.": "2026年9月6日（周日）上午11点，GOSPEL福音庆典将在植梦教会举行。这里为您指引前往长旨站附近礼拜堂的路线。",
+      "지도 앱으로 길찾기": "用地图导航",
+      "전화 문의": "电话咨询",
+      "꿈을심는교회 오시는 길 지도": "植梦教会地图",
+      "장지역에서 오시는 길": "从长旨站前往",
+      "장지역 1번 출구로 나오세요": "请从长旨站1号出口出来",
+      "지하철 8호선 장지역 1번 출구 기준으로 도보 약 5분 거리입니다.": "从地铁8号线长旨站1号出口步行约5分钟。",
+      "새말로 8길 방향으로 이동하세요": "请往 Saemal-ro 8-gil 方向前行",
+      "주소는 서울시 새말로 8길 26이며, 예배당은 건물 2층에 있습니다.": "地址是首尔市 Saemal-ro 8-gil 26号，礼拜堂在建筑2楼。",
+      "2층 꿈을심는교회로 올라오세요": "请上到2楼植梦教会",
+      "처음 방문하시는 분도 편히 안내받으실 수 있도록 축제 안내팀이 함께합니다.": "庆典接待团队会帮助第一次来访的朋友安心找到会场。",
+      "방문 전 확인": "来访前确认",
+      "행사 일시": "活动时间",
+      "행사명": "活动名称",
+      "꿈을심는교회 교회창립 19주년 기념 GOSPEL 축제": "植梦教会创立19周年纪念 GOSPEL福音庆典",
+      "안내": "说明",
+      "방문 중 길을 찾기 어려우시면 교회 사무실로 연락해 주세요. 친절하게 안내해 드리겠습니다.": "如果途中找不到路，请联系教会办公室。我们会亲切为您指引。",
       "당신의 소중한 사람을": "邀请你珍贵的人",
       "초청해 주세요": "一同参加",
       "복음의 씨앗이 자라날 수 있도록,": "愿福音的种子成长，",
