@@ -126,17 +126,17 @@
 
     <div class="hidden md:flex items-center gap-5" style="font-size:17px">
       <span class="nav-link" :class="currentView==='landing'?'on':''" @click="navigate('landing')">행사안내</span>
-      <span class="nav-link" :class="currentView==='directions'?'on':''" @click="navigate('directions')">오시는 길</span>
       <span class="nav-link font-semibold flex items-center gap-1.5" :class="currentView==='vip'?'on':''" @click="navigate('vip')" style="color:#fbbf24">
         <iconify-icon icon="solar:crown-bold" style="font-size:14px"></iconify-icon>VIP명단 작성
       </span>
-      <span class="nav-link" :class="currentView==='decision'?'on':''" @click="navigate('decision')">결신카드 작성</span>
       <template x-if="isLoggedIn">
         <span class="nav-link" :class="currentView==='dashboard'?'on':''" @click="navigate('dashboard')">전도현황</span>
       </template>
       <template x-if="isLoggedIn">
         <span class="nav-link" :class="currentView==='targets'?'on':''" @click="navigate('targets')">전도대상자</span>
       </template>
+      <span class="nav-link" :class="currentView==='decision'?'on':''" @click="navigate('decision')">결신카드 작성</span>
+      <span class="nav-link" :class="currentView==='directions'?'on':''" @click="navigate('directions')">오시는 길</span>
       <template x-if="isAdmin">
         <span class="nav-link" :class="currentView==='invite'?'on':''" @click="navigate('invite')">초청발송</span>
       </template>
