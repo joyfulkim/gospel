@@ -1293,6 +1293,11 @@ function gospel() {
         await this._onUser(result.user);
         this._afterLogin();
       } catch (error) {
+        if (this.auth.currentUser) {
+          await this._onUser(this.auth.currentUser);
+          this._afterLogin();
+          return;
+        }
         this.loginForm.error = this.authErrorMessage(error);
       } finally {
         this.loading = false;
@@ -1318,6 +1323,7 @@ function gospel() {
     },
 
     _afterLogin() {
+      this.loginForm = { email:'', password:'', error:'' };
       const dest = this.pendingView || 'targets';
       this.pendingView = null;
       this.navigate(dest);
